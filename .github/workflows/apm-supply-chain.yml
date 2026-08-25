@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Check out the declared context
-        # actions/checkout v4.3.1, pinned to its immutable commit.
+        # actions/checkout v4.4.0, pinned to its immutable commit.
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
       - name: Install the pinned APM CLI
