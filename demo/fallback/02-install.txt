@@ -1,0 +1,17 @@
+CAPTURED DRY RUN - APM 0.28.0
+
+> apm install
+
+Targets: claude, copilot, cursor  (source: apm.yml)
+
+github.com/webmaxru/meridian-agent-context-demo/registry/skills/secure-payment-review#v1.0.0
+#v1.0.0 @40a6cabc
+|-- Skill integrated -> .agents/skills/, .claude/skills/
+
+[*] Installed 1 APM dependency
+
+Generated:
+.agents\skills\secure-payment-review\SKILL.md
+.claude\skills\secure-payment-review\SKILL.md
+
+Exit code: 0

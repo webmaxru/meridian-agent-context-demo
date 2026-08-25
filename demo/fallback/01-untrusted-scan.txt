@@ -1,0 +1,11 @@
+CAPTURED DRY RUN - APM 0.28.0
+
+> apm audit --file .\.demo-live\quarantine\refund-helper\SKILL.md --verbose
+
+CRITICAL  .demo-live/quarantine/refund-helper/SKILL.md  13:40  U+202E
+Right-to-left override (RLO)
+
+[x] 1 critical finding(s) in 1 file(s) -- hidden characters detected
+[i] These characters may embed invisible instructions
+
+Exit code: 1

@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Demo-first session deck: Build a Supply Chain for Agent Context with Agent Package Manager.">
+  <meta name="author" content="Maxim Salnikov">
+  <title>Build a Supply Chain for Agent Context</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: var(--cp-bg);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, a { font: inherit; }
+    button:focus-visible, a:focus-visible {
+      outline: 3px solid var(--cp-accent);
+      outline-offset: 3px;
+    }
+    code, .mono {
+      font-family: Consolas, "Courier New", Courier, monospace;
+    }
+
+    .deck { position: fixed; inset: 0; }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      overflow: hidden;
+      padding: clamp(2rem, 5vw, 5rem);
+      background:
+        linear-gradient(90deg, var(--cp-border) 1px, transparent 1px),
+        linear-gradient(var(--cp-border) 1px, transparent 1px),
+        var(--cp-bg);
+      background-size: 64px 64px;
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--cp-overlay), transparent);
+      pointer-events: none;
+    }
+    .slide.active {
+      display: grid;
+      animation: enter 260ms ease-out;
+    }
+    @keyframes enter {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide.active { animation: none; }
+      * { scroll-behavior: auto !important; }
+    }
+    .frame {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0 0 1.25rem;
+      color: var(--cp-text-muted);
+      font: 600 clamp(0.74rem, 1.25vw, 0.9rem) Consolas, "Courier New", Courier, monospace;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background: var(--cp-accent);
+      box-shadow: 0 0 0 6px var(--cp-accent-soft);
+    }
+    h1, h2, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 1.25rem;
+      max-width: 15ch;
+      font-size: clamp(3rem, 7.2vw, 7rem);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+      font-weight: 720;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.2rem, 4.8vw, 4.8rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      font-weight: 700;
+    }
+    .lead {
+      max-width: 58ch;
+      margin-bottom: 0;
+      color: var(--cp-text-muted);
+      font-size: clamp(1.15rem, 2vw, 1.7rem);
+      line-height: 1.45;
+    }
+    .accent { color: var(--cp-accent); }
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 2.25rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.25rem;
+      padding: 0.45rem 0.8rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+      color: var(--cp-text-muted);
+      font: 600 0.8rem Consolas, "Courier New", Courier, monospace;
+    }
+    .chip.strong {
+      border-color: var(--cp-accent);
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+    }
+
+    .contrast {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: stretch;
+      margin-top: clamp(2rem, 4vh, 3.5rem);
+      max-width: 1180px;
+    }
+    .supply-card {
+      padding: 1.2rem 1.35rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
+    }
+    .supply-card .label {
+      margin-bottom: 0.8rem;
+      color: var(--cp-text-muted);
+      font: 600 0.78rem Consolas, "Courier New", Courier, monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .checks { display: flex; gap: 0.55rem; flex-wrap: wrap; }
+    .check {
+      padding: 0.5rem 0.65rem;
+      border-radius: 0.625rem;
+      background: var(--cp-surface-soft);
+      color: var(--cp-success);
+      font: 700 0.84rem Consolas, "Courier New", Courier, monospace;
+    }
+    .check.missing {
+      color: var(--cp-danger);
+      background: var(--cp-accent-soft);
+    }
+    .versus {
+      display: grid;
+      place-items: center;
+      color: var(--cp-text-muted);
+      font: 700 0.9rem Consolas, "Courier New", Courier, monospace;
+    }
+
+    .chain {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: clamp(2rem, 5vh, 4rem);
+      max-width: 1180px;
+    }
+    .chain::before {
+      display: none;
+    }
+    .node {
+      position: relative;
+      min-width: 0;
+      min-height: 8.5rem;
+      padding: 1rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
+    }
+    .node::before {
+      content: attr(data-step);
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 3.4rem;
+      height: 3.4rem;
+      margin-bottom: 1rem;
+      border: 4px solid var(--cp-bg);
+      border-radius: 50%;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font: 700 0.9rem Consolas, "Courier New", Courier, monospace;
+    }
+    .node.danger::before { background: var(--cp-danger); color: var(--cp-accent-fg); }
+    .node.success::before { background: var(--cp-success); color: var(--cp-accent-fg); }
+    .node h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+    .node p { margin: 0; color: var(--cp-text-muted); font-size: 0.92rem; line-height: 1.45; }
+    .node:nth-child(4) { grid-column: 3; }
+    .node:nth-child(5) { grid-column: 2; grid-row: 2; }
+    .node:nth-child(6) { grid-column: 1; grid-row: 2; }
+    .chain-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      color: var(--cp-text-muted);
+      font: 600 clamp(0.85rem, 1.4vw, 1rem) Consolas, "Courier New", Courier, monospace;
+    }
+
+    .gate-grid {
+      display: block;
+      margin-top: clamp(1.5rem, 4vh, 3rem);
+      max-width: 1260px;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      padding: 1.25rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
+    }
+    .flow-step {
+      position: relative;
+      min-width: 0;
+      min-height: 9.5rem;
+      padding: 1rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface-soft);
+    }
+    .flow-step:not(:last-child)::after {
+      content: "\2192";
+      position: absolute;
+      right: -0.72rem;
+      top: 50%;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 1.45rem;
+      height: 1.45rem;
+      border-radius: 50%;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      transform: translateY(-50%);
+    }
+    .flow-step .mini {
+      color: var(--cp-accent);
+      font: 700 0.72rem Consolas, "Courier New", Courier, monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .flow-step h3 { margin: 0.65rem 0 0.45rem; font-size: 1rem; }
+    .flow-step p { margin: 0; color: var(--cp-text-muted); font-size: 0.86rem; line-height: 1.4; }
+    .flow-step.result {
+      border: 2px solid var(--cp-success);
+      background: var(--cp-surface);
+    }
+    .flow-step.result .mini,
+    .flow-step.result h3 { color: var(--cp-success); }
+    .required {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.4rem;
+      border: 2px solid var(--cp-success);
+      border-radius: 16px;
+      background: var(--cp-surface);
+    }
+    .required .status {
+      color: var(--cp-success);
+      font: 800 clamp(2.3rem, 4.4vw, 4rem) Consolas, "Courier New", Courier, monospace;
+      letter-spacing: -0.06em;
+    }
+    .required p { margin: 0; color: var(--cp-text-muted); line-height: 1.45; }
+    .protections {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    .protection {
+      padding: 0.8rem;
+      border: 1px dashed var(--cp-border-strong);
+      border-radius: 0.625rem;
+      color: var(--cp-text-muted);
+      text-align: center;
+      font: 600 0.78rem Consolas, "Courier New", Courier, monospace;
+    }
+
+    .closing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.85rem;
+      margin: clamp(2rem, 5vh, 4rem) 0 2rem;
+      max-width: 1200px;
+    }
+    .closing-word {
+      padding: 1.4rem 1rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
+      text-align: center;
+      font-size: clamp(1.25rem, 2.4vw, 2rem);
+      font-weight: 720;
+    }
+    .closing-word span {
+      display: block;
+      margin-top: 0.45rem;
+      color: var(--cp-text-muted);
+      font: 500 0.76rem Consolas, "Courier New", Courier, monospace;
+    }
+    .closing-word:last-child {
+      border: 2px solid var(--cp-accent);
+      color: var(--cp-accent);
+    }
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 3rem;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+      color: var(--cp-link);
+      text-decoration: none;
+      font: 600 clamp(0.85rem, 1.4vw, 1rem) Consolas, "Courier New", Courier, monospace;
+    }
+
+    .hud {
+      position: fixed;
+      z-index: 20;
+      left: 1rem;
+      right: 1rem;
+      bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--cp-text-muted);
+      font: 600 0.76rem Consolas, "Courier New", Courier, monospace;
+    }
+    .progress {
+      display: flex;
+      flex: 1;
+      gap: 0.3rem;
+      max-width: 18rem;
+    }
+    .progress i {
+      flex: 1;
+      height: 4px;
+      border-radius: 0.625rem;
+      background: var(--cp-border);
+    }
+    .progress i.done { background: var(--cp-accent); }
+    .hud button {
+      border: 0;
+      background: transparent;
+      color: var(--cp-text-muted);
+      cursor: pointer;
+    }
+    html:fullscreen .hud { display: none; }
+
+    .notes-source { display: none; }
+    .notes-panel {
+      position: fixed;
+      z-index: 30;
+      top: 1rem;
+      right: 1rem;
+      bottom: 2.75rem;
+      display: none;
+      width: min(34rem, calc(100vw - 2rem));
+      overflow: auto;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-panel-strong);
+      box-shadow: var(--cp-shadow);
+    }
+    .notes-panel.open { display: block; }
+    .notes-panel h3 { margin: 0 0 0.75rem; font-size: 1rem; }
+    .notes-panel p, .notes-panel li { color: var(--cp-text-muted); line-height: 1.5; }
+    .notes-panel .time {
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      color: var(--cp-accent);
+      font: 700 0.78rem Consolas, "Courier New", Courier, monospace;
+    }
+
+    @media (max-width: 980px) {
+      .node { min-height: 8rem; }
+      .gate-grid { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: repeat(2, 1fr); }
+      .closing-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-height: 760px) {
+      .slide { padding: 1.5rem 2.25rem 2.4rem; }
+      h1 { font-size: clamp(2.6rem, 5.4vw, 4.6rem); }
+      h2 { font-size: clamp(2rem, 3.6vw, 3.25rem); }
+      .lead { font-size: clamp(1rem, 1.7vw, 1.3rem); }
+      .contrast { margin-top: 1.5rem; }
+      .chain { margin-top: 1.3rem; }
+      .node { min-height: 6.8rem; padding: 0.8rem; }
+      .node::before { width: 2.8rem; height: 2.8rem; margin-bottom: 0.6rem; }
+      .flow-step { min-height: 7.4rem; }
+      .closing-grid { margin: 1.5rem 0; }
+    }
+    @media print {
+      body { overflow: visible; }
+      .deck { position: static; }
+      .slide, .slide.active {
+        position: relative;
+        display: grid;
+        width: 13.333in;
+        height: 7.5in;
+        break-after: page;
+      }
+      .hud, .notes-panel { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-live="polite">
+    <section class="slide active" data-title="Title">
+      <div class="frame">
+        <p class="eyebrow">Meridian / 30-minute live build</p>
+        <h1>Build a Supply Chain<br><span class="accent">for Agent Context</span></h1>
+        <p class="lead">Source approved skills. Pin the release. Verify every deployed byte. Make policy a required CI check.</p>
+        <div class="contrast" aria-label="Software dependencies versus agent context">
+          <div class="supply-card">
+            <div class="label">software dependency</div>
+            <div class="checks">
+              <span class="check">&#10003; signed</span>
+              <span class="check">&#10003; pinned</span>
+              <span class="check">&#10003; scanned</span>
+            </div>
+          </div>
+          <div class="versus">VS</div>
+          <div class="supply-card">
+            <div class="label">downloaded SKILL.md</div>
+            <div class="checks">
+              <span class="check missing">? owner</span>
+              <span class="check missing">? version</span>
+              <span class="check missing">? integrity</span>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          <span class="chip strong">APM = Agent Package Manager</span>
+          <span class="chip">Maxim Salnikov</span>
+          <span class="chip">live demo + recovery checkpoints</span>
+        </div>
+      </div>
+      <aside class="notes-source">
+        <span class="time">00:00-01:20</span>
+        <h3>Hook, then leave the deck</h3>
+        <p>You would never pipe a random internet script into the build. Copying a SKILL.md into an agent is the same supply-chain decision, disguised as text.</p>
+        <ul>
+          <li>Meridian already signs, pins, and scans application dependencies.</li>
+          <li>Promise four proofs: owner, version, hash, gate.</li>
+          <li>Switch to VS Code at 01:20. Do not explain APM architecture here.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="slide" data-title="Supply-chain route">
+      <div class="frame">
+        <p class="eyebrow">The route / one skill, end to end</p>
+        <h2>Trust moves left.<br><span class="accent">Consistency moves right.</span></h2>
+        <div class="chain" aria-label="Agent context supply chain">
+          <article class="node danger" data-step="01">
+            <h3>Quarantine</h3>
+            <p>Unowned internet skill. Hidden Unicode found.</p>
+          </article>
+          <article class="node" data-step="02">
+            <h3>Review</h3>
+            <p>Narrow behavior, named owner, CODEOWNERS.</p>
+          </article>
+          <article class="node" data-step="03">
+            <h3>Release</h3>
+            <p>Trusted catalog tag: <span class="mono">v1.0.0</span>.</p>
+          </article>
+          <article class="node" data-step="04">
+            <h3>Declare</h3>
+            <p><span class="mono">apm.yml</span> pins the approved source.</p>
+          </article>
+          <article class="node" data-step="05">
+            <h3>Resolve</h3>
+            <p>Commit + package and deployed-file hashes.</p>
+          </article>
+          <article class="node success" data-step="06">
+            <h3>Deploy</h3>
+            <p>Copilot, Claude, Cursor. One dependency.</p>
+          </article>
+        </div>
+        <div class="chain-caption">
+          <span>reviewed source &rarr; immutable resolution &rarr; native harness paths</span>
+          <span>policy surrounds the whole route</span>
+        </div>
+      </div>
+      <aside class="notes-source">
+        <span class="time">04:30-05:30</span>
+        <h3>Name the artifacts, then return to VS Code</h3>
+        <p>The release is the trusted source. The manifest is intent. The lockfile is evidence. Policy decides whether the source is allowed.</p>
+        <ul>
+          <li>Do not explain every node for more than one sentence.</li>
+          <li>Switch to .demo-live/meridian-checkout/apm.yml.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="slide" data-title="Required CI gate">
+      <div class="frame">
+        <p class="eyebrow">The trust boundary / required CI</p>
+        <h2>Local checks are optional.<br><span class="accent">Required CI is governance.</span></h2>
+        <div class="gate-grid">
+          <div class="flow" aria-label="Pull request audit flow">
+            <article class="flow-step">
+              <span class="mini">change</span>
+              <h3>Pull request</h3>
+              <p>Manifest, lockfile, policy, or deployed context.</p>
+            </article>
+            <article class="flow-step">
+              <span class="mini">immutable</span>
+              <h3>Pinned runner</h3>
+              <p>Action commit and CLI <span class="mono">0.28.0</span>.</p>
+            </article>
+            <article class="flow-step">
+              <span class="mini">fail closed</span>
+              <h3>Audit + policy</h3>
+              <p>Source, refs, hashes, Unicode, drift, allowlist.</p>
+            </article>
+            <article class="flow-step result">
+              <span class="mini">&#10003; required status</span>
+              <h3>CI gate passed</h3>
+              <p>31 checks. Merge is enabled only after this result.</p>
+            </article>
+          </div>
+          <div class="protections" aria-label="Separately protected control files">
+            <div class="protection">workflow / reviewed</div>
+            <div class="protection">policy / CODEOWNERS</div>
+            <div class="protection">catalog / tagged</div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes-source">
+        <span class="time">18:30-19:30</span>
+        <h3>Set up the repository-boundary argument</h3>
+        <p>A developer can skip a local command. They cannot merge around a required check without authority to change the separately protected workflow or policy.</p>
+        <ul>
+          <li>Call out immutable action, pinned CLI, blocking policy, required status.</li>
+          <li>Accurate boundary: organization administrators remain ultimate authority.</li>
+          <li>Switch to .github/workflows/apm-supply-chain.yml.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="slide" data-title="Close">
+      <div class="frame">
+        <p class="eyebrow">The dependency test</p>
+        <h2>The skill is no longer copied.<br><span class="accent">It is a governed dependency.</span></h2>
+        <div class="closing-grid">
+          <div class="closing-word">Owner<span>reviewed source</span></div>
+          <div class="closing-word">Version<span>pinned release</span></div>
+          <div class="closing-word">Hash<span>resolved evidence</span></div>
+          <div class="closing-word">Gate<span>required policy check</span></div>
+        </div>
+        <div class="meta">
+          <a class="repo-link" href="https://github.com/webmaxru/meridian-agent-context-demo">github.com/webmaxru/meridian-agent-context-demo</a>
+          <span class="chip">microsoft.github.io/apm</span>
+        </div>
+      </div>
+      <aside class="notes-source">
+        <span class="time">24:30-30:00</span>
+        <h3>Close in one minute; leave this up for questions</h3>
+        <p>The skill is a reviewed source, declared dependency, immutable resolution, hashed deployment, and required policy check.</p>
+        <p>Final line: Agent context becomes a real dependency when it has an owner, a version, a hash, and a gate.</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="hud">
+    <span>Build a Supply Chain for Agent Context</span>
+    <span class="progress" aria-hidden="true"></span>
+    <span><b id="current">1</b> / <span id="total">4</span></span>
+    <button id="notesButton" type="button" title="Toggle speaker notes (N)">notes [N]</button>
+    <button id="themeButton" type="button" title="Toggle theme (T)">theme [T]</button>
+    <button id="fullscreenButton" type="button" title="Toggle fullscreen (F)">full [F]</button>
+  </footer>
+
+  <aside class="notes-panel" id="notesPanel" aria-label="Speaker notes"></aside>
+
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll(".slide")];
+      const progress = document.querySelector(".progress");
+      const current = document.getElementById("current");
+      const total = document.getElementById("total");
+      const notesPanel = document.getElementById("notesPanel");
+      const params = new URLSearchParams(window.location.search);
+      let index = Math.min(
+        slides.length - 1,
+        Math.max(0, Number.parseInt(params.get("slide") || "1", 10) - 1)
+      );
+
+      total.textContent = String(slides.length);
+      slides.forEach(() => progress.appendChild(document.createElement("i")));
+
+      function render() {
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle("active", slideIndex === index);
+          slide.setAttribute("aria-hidden", String(slideIndex !== index));
+        });
+        [...progress.children].forEach((bar, barIndex) => {
+          bar.classList.toggle("done", barIndex <= index);
+        });
+        current.textContent = String(index + 1);
+        document.title = `${slides[index].dataset.title} - Build a Supply Chain for Agent Context`;
+        notesPanel.innerHTML = slides[index].querySelector(".notes-source").innerHTML;
+        history.replaceState(null, "", `?slide=${index + 1}`);
+      }
+
+      function move(delta) {
+        index = Math.min(slides.length - 1, Math.max(0, index + delta));
+        render();
+      }
+
+      function toggleTheme() {
+        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = next;
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (["ArrowRight", "PageDown", " "].includes(event.key)) {
+          event.preventDefault();
+          move(1);
+        } else if (["ArrowLeft", "PageUp"].includes(event.key)) {
+          event.preventDefault();
+          move(-1);
+        } else if (event.key === "Home") {
+          index = 0;
+          render();
+        } else if (event.key === "End") {
+          index = slides.length - 1;
+          render();
+        } else if (event.key.toLowerCase() === "n") {
+          notesPanel.classList.toggle("open");
+        } else if (event.key.toLowerCase() === "t") {
+          toggleTheme();
+        } else if (event.key.toLowerCase() === "f") {
+          document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+        }
+      });
+
+      document.getElementById("notesButton").addEventListener("click", () => notesPanel.classList.toggle("open"));
+      document.getElementById("themeButton").addEventListener("click", toggleTheme);
+      document.getElementById("fullscreenButton").addEventListener("click", () => {
+        document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+CAPTURED DRY RUN - APM 0.28.0
+
+> apm audit --ci --policy .\apm-policy.yml --no-fail-fast
+
+[+] Policy enforcement: block
+[+] All dependencies match allow list
+[+] All dependencies use pinned constraints
+[+] No critical hidden Unicode or hash drift detected
+
+[*] All 31 check(s) passed
+[>] Replaying install (cache-only)...
+[+] No drift detected
+
+Exit code: 0

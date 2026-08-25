@@ -23,7 +23,14 @@ The `v1.0.0` tag contains Meridian's first approved skill:
 webmaxru/meridian-agent-context-demo/registry/skills/secure-payment-review#v1.0.0
 ```
 
-## Demo
+## Run the demo
 
-After the full demo assets land on `main`, use `DEMO-RUNBOOK.md` for the exact, timed walkthrough.
+The exact 30-minute script, commands, expected outputs, timing cutoffs, and recovery checkpoints are
+in [`DEMO-RUNBOOK.md`](DEMO-RUNBOOK.md).
 
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\preflight.ps1
+```
+
+The preflight verifies APM 0.28.0, warms the public release, runs the 31-check audit, and resets the
+ignored `.demo-live` workspace.

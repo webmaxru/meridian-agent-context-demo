@@ -1,0 +1,37 @@
+name: APM supply-chain gate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: audit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: reference/meridian-checkout
+
+    steps:
+      - name: Check out the declared context
+        # actions/checkout v4.3.1, pinned to its immutable commit.
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Install the pinned APM CLI
+        # microsoft/apm-action v1.10.0, pinned to its immutable commit.
+        uses: microsoft/apm-action@d723bb64ed70c135bbaf87d126b721dd2dae0439
+        with:
+          apm-version: "0.28.0"
+          setup-only: true
+
+      - name: Require the policy
+        run: apm policy status --policy-source ./apm-policy.yml --check --no-cache
+
+      - name: Audit source, lockfile, hashes, drift, and policy
+        run: apm audit --ci --policy ./apm-policy.yml --no-cache --no-fail-fast

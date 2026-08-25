@@ -1,0 +1,11 @@
+# Meridian's demo policy: only the reviewed catalog is allowed, and every dependency must be pinned.
+name: Meridian approved agent context
+version: "1.0.0"
+enforcement: block
+fetch_failure: block
+
+dependencies:
+  allow:
+    - webmaxru/meridian-agent-context-demo
+    - webmaxru/meridian-agent-context-demo/**
+  require_pinned_constraint: true

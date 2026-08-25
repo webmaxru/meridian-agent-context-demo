@@ -1,0 +1,18 @@
+# Meridian treats reviewed agent context as a pinned project dependency.
+name: meridian-checkout-agent-context
+version: 1.0.0
+description: Shared AI-agent context for the Meridian checkout service.
+author: Meridian Checkout Team
+
+targets:
+  - claude
+  - copilot
+  - cursor
+
+dependencies:
+  apm:
+    - webmaxru/meridian-agent-context-demo/registry/skills/secure-payment-review#v1.0.0
+  mcp: []
+
+includes: auto
+scripts: {}
