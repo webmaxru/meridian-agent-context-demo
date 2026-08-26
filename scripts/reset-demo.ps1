@@ -18,12 +18,5 @@ if (Test-Path -LiteralPath $liveRoot) {
 
 Copy-Item -LiteralPath $source -Destination $liveRoot -Recurse
 
-$templatePath = Join-Path $liveRoot "quarantine\refund-helper\SKILL.template.md"
-$unsafePath = Join-Path $liveRoot "quarantine\refund-helper\SKILL.md"
-$template = Get-Content -LiteralPath $templatePath -Raw
-$unsafe = $template.Replace("{{BIDI_RLO}}", [string][char]0x202E)
-[System.IO.File]::WriteAllText($unsafePath, $unsafe, [System.Text.UTF8Encoding]::new($false))
-Remove-Item -LiteralPath $templatePath
-
 Write-Host "Demo reset: $liveRoot"
-Write-Host "Open this folder in VS Code, then start in .demo-live\meridian-checkout."
+Write-Host "Start in .demo-live\consume-checkout, then continue in .demo-live\governed-checkout."

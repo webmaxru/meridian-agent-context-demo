@@ -1,0 +1,22 @@
+CAPTURED SETUP - REQUIRED APM GATE
+
+Consumer repository: webmaxru/meridian-agent-context-demo (public)
+Private source: webmaxru/meridian-agent-context-registry
+Workflow job: audit
+APM CLI: 0.28.0
+Policy: enforcement=block, fetch_failure=block
+Credential: encrypted MERIDIAN_REGISTRY_PAT environment secret
+Environment: meridian-registry, designated-reviewer approval required
+
+main protection:
+- strict required status: audit
+- administrator enforcement: enabled
+- approving reviews: 1
+- CODEOWNERS review: required
+- force pushes: disabled
+- branch deletion: disabled
+- linear history: required
+- conversation resolution: required
+
+Ordinary contributors cannot merge around the audit gate.
+Repository administrators remain the ultimate trust boundary.

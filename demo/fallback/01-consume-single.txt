@@ -1,0 +1,13 @@
+CAPTURED DRY RUN - APM 0.28.0
+
+> apm install 'webmaxru/ai-native-dev/skills/agent-package-manager#v1.9.0'
+
+[+] webmaxru/ai-native-dev/skills/agent-package-manager#v1.9.0
+[*] Updated apm.yml with 1 new package
+[i] Targets: copilot  (source: apm.yml)
+[+] github.com/webmaxru/ai-native-dev/skills/agent-package-manager#v1.9.0
+    #v1.9.0 @d04f0b01
+|-- Skill integrated -> .agents/skills/
+
+[*] Installed 1 APM dependency in 18.8s.
+Exit code: 0

@@ -1,0 +1,6 @@
+# Preserve the upstream bytes whose trailing spaces are part of the package hash.
+reference/consume-checkout/**/agent-skill-deploy/references/surfaces.md -text -whitespace
+
+# APM's Windows adapters are generated with CRLF; keep checkout normalization stable.
+reference/consume-checkout/.claude/commands/*.md text eol=crlf
+reference/consume-checkout/.cursor/commands/*.md text eol=crlf

@@ -3,69 +3,75 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Demo-first session deck: Build a Supply Chain for Agent Context with Agent Package Manager.">
+  <meta name="description" content="Build a Supply Chain for Agent Context with Agent Package Manager.">
   <meta name="author" content="Maxim Salnikov">
   <title>Build a Supply Chain for Agent Context</title>
   <script>
     (() => {
-      const param = new URLSearchParams(window.location.search).get("scoutTheme");
-      const theme =
-        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
+      const requested = new URLSearchParams(window.location.search).get("scoutTheme");
+      const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = requested || preferred;
     })();
   </script>
   <style>
     :root {
       color-scheme: light;
-      --cp-bg: #f7f4ef;
-      --cp-bg-elevated: #fcfbf8;
-      --cp-surface: #ffffff;
-      --cp-surface-soft: #f5f5f5;
-      --cp-border: #dedede;
-      --cp-border-strong: #919191;
-      --cp-text: #242424;
-      --cp-text-muted: #5c5c5c;
-      --cp-text-soft: #6f6f6f;
-      --cp-accent: #b11f4b;
-      --cp-accent-hover: #9a1a41;
-      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-bg: #f4efe7;
+      --cp-bg-elevated: #fffaf3;
+      --cp-surface: #fffdfa;
+      --cp-surface-soft: #eadfe4;
+      --cp-border: #8a7380;
+      --cp-border-strong: #3c2935;
+      --cp-text: #1d161d;
+      --cp-text-muted: #51424b;
+      --cp-text-soft: #675662;
+      --cp-accent: #a30e46;
+      --cp-accent-hover: #86103c;
+      --cp-accent-soft: #f4dbe4;
       --cp-accent-fg: #ffffff;
-      --cp-success: #16a34a;
-      --cp-danger: #dc2626;
-      --cp-warning: #f59e0b;
-      --cp-link: #0078d4;
-      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
-      --cp-overlay: rgba(255, 255, 255, 0.8);
-      --cp-panel: rgba(255, 255, 255, 0.86);
-      --cp-panel-strong: rgba(255, 255, 255, 0.96);
-      --cp-sheen: rgba(255, 255, 255, 0.55);
-      --cp-highlight: rgba(177, 31, 75, 0.12);
+      --cp-success: #08663b;
+      --cp-danger: #b42318;
+      --cp-warning: #7a4300;
+      --cp-link: #075b9e;
+      --cp-shadow: 0 18px 45px rgba(49, 26, 39, 0.14);
+      --cp-overlay: rgba(244, 239, 231, 0.76);
+      --cp-panel: rgba(255, 253, 250, 0.96);
+      --cp-panel-strong: #fffdfa;
+      --cp-sheen: rgba(255, 255, 255, 0.58);
+      --cp-highlight: rgba(163, 14, 70, 0.13);
+      --cp-code: #211820;
+      --cp-code-text: #fff7fb;
+      --cp-grid: rgba(60, 41, 53, 0.12);
     }
+
     html[data-theme="dark"] {
       color-scheme: dark;
-      --cp-bg: #3d3b3a;
-      --cp-bg-elevated: #343231;
-      --cp-surface: #292929;
-      --cp-surface-soft: #2e2e2e;
-      --cp-border: #474747;
-      --cp-border-strong: #5f5f5f;
-      --cp-text: #dedede;
-      --cp-text-muted: #919191;
-      --cp-text-soft: #b0b0b0;
-      --cp-accent: #fd8ea1;
-      --cp-accent-hover: #fb7b91;
-      --cp-accent-soft: rgba(253, 142, 161, 0.14);
-      --cp-accent-fg: #1a1a1a;
-      --cp-success: #4ade80;
-      --cp-danger: #f87171;
-      --cp-warning: #fbbf24;
-      --cp-link: #4da6ff;
-      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
-      --cp-overlay: rgba(41, 41, 41, 0.88);
-      --cp-panel: rgba(41, 41, 41, 0.72);
-      --cp-panel-strong: rgba(41, 41, 41, 0.96);
-      --cp-sheen: rgba(255, 255, 255, 0.04);
-      --cp-highlight: rgba(253, 142, 161, 0.12);
+      --cp-bg: #111014;
+      --cp-bg-elevated: #171319;
+      --cp-surface: #1d181f;
+      --cp-surface-soft: #2b222b;
+      --cp-border: #a28b9b;
+      --cp-border-strong: #d8c8d2;
+      --cp-text: #fff9fd;
+      --cp-text-muted: #d4c7d0;
+      --cp-text-soft: #bbaeba;
+      --cp-accent: #ff6f96;
+      --cp-accent-hover: #ff8aaa;
+      --cp-accent-soft: rgba(255, 111, 150, 0.18);
+      --cp-accent-fg: #1a0e13;
+      --cp-success: #72e6a3;
+      --cp-danger: #ff8c82;
+      --cp-warning: #ffc46b;
+      --cp-link: #82caff;
+      --cp-shadow: 0 18px 45px rgba(0, 0, 0, 0.42);
+      --cp-overlay: rgba(17, 16, 20, 0.82);
+      --cp-panel: rgba(29, 24, 31, 0.97);
+      --cp-panel-strong: #1d181f;
+      --cp-sheen: rgba(255, 255, 255, 0.05);
+      --cp-highlight: rgba(255, 111, 150, 0.18);
+      --cp-code: #08070a;
+      --cp-code-text: #fff8fc;
+      --cp-grid: rgba(216, 200, 210, 0.12);
     }
 
     * { box-sizing: border-box; }
@@ -83,9 +89,7 @@
       outline: 3px solid var(--cp-accent);
       outline-offset: 3px;
     }
-    code, .mono {
-      font-family: Consolas, "Courier New", Courier, monospace;
-    }
+    code, .mono { font-family: Consolas, "Courier New", Courier, monospace; }
 
     .deck { position: fixed; inset: 0; }
     .slide {
@@ -93,10 +97,10 @@
       inset: 0;
       display: none;
       overflow: hidden;
-      padding: clamp(2rem, 5vw, 5rem);
+      padding: 42px 58px 54px;
       background:
-        linear-gradient(90deg, var(--cp-border) 1px, transparent 1px),
-        linear-gradient(var(--cp-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--cp-grid) 1px, transparent 1px),
+        linear-gradient(var(--cp-grid) 1px, transparent 1px),
         var(--cp-bg);
       background-size: 64px 64px;
     }
@@ -104,340 +108,536 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--cp-overlay), transparent);
+      background: linear-gradient(135deg, var(--cp-overlay) 0 50%, transparent 86%);
       pointer-events: none;
+    }
+    .slide::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 12px;
+      height: 100%;
+      background: var(--cp-accent);
     }
     .slide.active {
       display: grid;
-      animation: enter 260ms ease-out;
+      animation: enter 220ms ease-out;
     }
     @keyframes enter {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(7px); }
       to { opacity: 1; transform: translateY(0); }
     }
     @media (prefers-reduced-motion: reduce) {
       .slide.active { animation: none; }
-      * { scroll-behavior: auto !important; }
     }
+
     .frame {
       position: relative;
       z-index: 1;
       width: 100%;
+      max-width: 1164px;
       height: 100%;
-      margin: auto;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-    .eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin: 0 0 1.25rem;
-      color: var(--cp-text-muted);
-      font: 600 clamp(0.74rem, 1.25vw, 0.9rem) Consolas, "Courier New", Courier, monospace;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-    .eyebrow::before {
-      content: "";
-      width: 0.7rem;
-      height: 0.7rem;
-      border-radius: 50%;
-      background: var(--cp-accent);
-      box-shadow: 0 0 0 6px var(--cp-accent-soft);
-    }
-    h1, h2, p { margin-top: 0; }
+    h1, h2, h3, p { margin-top: 0; }
     h1 {
-      margin-bottom: 1.25rem;
-      max-width: 15ch;
-      font-size: clamp(3rem, 7.2vw, 7rem);
+      margin-bottom: 22px;
+      max-width: 12ch;
+      font-size: clamp(54px, 6.3vw, 82px);
       line-height: 0.96;
       letter-spacing: -0.055em;
-      font-weight: 720;
+      font-weight: 760;
     }
     h2 {
-      margin-bottom: 1rem;
-      font-size: clamp(2.2rem, 4.8vw, 4.8rem);
-      line-height: 1;
+      margin: 0;
+      font-size: clamp(39px, 4.4vw, 59px);
+      line-height: 1.02;
       letter-spacing: -0.045em;
-      font-weight: 700;
+      font-weight: 740;
     }
-    .lead {
-      max-width: 58ch;
-      margin-bottom: 0;
-      color: var(--cp-text-muted);
-      font-size: clamp(1.15rem, 2vw, 1.7rem);
-      line-height: 1.45;
-    }
+    h3 { margin-bottom: 8px; font-size: 19px; line-height: 1.15; }
     .accent { color: var(--cp-accent); }
-    .meta {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-top: 2.25rem;
-    }
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 2.25rem;
-      padding: 0.45rem 0.8rem;
-      border: 1px solid var(--cp-border);
-      border-radius: 0.625rem;
-      background: var(--cp-surface);
-      color: var(--cp-text-muted);
-      font: 600 0.8rem Consolas, "Courier New", Courier, monospace;
-    }
-    .chip.strong {
-      border-color: var(--cp-accent);
-      background: var(--cp-accent);
-      color: var(--cp-accent-fg);
-    }
-
-    .contrast {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 1rem;
-      align-items: stretch;
-      margin-top: clamp(2rem, 4vh, 3.5rem);
-      max-width: 1180px;
-    }
-    .supply-card {
-      padding: 1.2rem 1.35rem;
-      border: 1px solid var(--cp-border);
-      border-radius: 16px;
-      background: var(--cp-surface);
-      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
-    }
-    .supply-card .label {
-      margin-bottom: 0.8rem;
-      color: var(--cp-text-muted);
-      font: 600 0.78rem Consolas, "Courier New", Courier, monospace;
-      letter-spacing: 0.1em;
+    .kicker {
+      margin: 0 0 12px;
+      color: var(--cp-accent);
+      font: 750 14px/1 Consolas, "Courier New", Courier, monospace;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
     }
-    .checks { display: flex; gap: 0.55rem; flex-wrap: wrap; }
-    .check {
-      padding: 0.5rem 0.65rem;
-      border-radius: 0.625rem;
-      background: var(--cp-surface-soft);
-      color: var(--cp-success);
-      font: 700 0.84rem Consolas, "Courier New", Courier, monospace;
-    }
-    .check.missing {
-      color: var(--cp-danger);
-      background: var(--cp-accent-soft);
-    }
-    .versus {
-      display: grid;
-      place-items: center;
+    .lead {
+      max-width: 60ch;
+      margin: 0;
       color: var(--cp-text-muted);
-      font: 700 0.9rem Consolas, "Courier New", Courier, monospace;
+      font-size: 22px;
+      line-height: 1.42;
+    }
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 26px;
+    }
+    .section-head .lead {
+      max-width: 38ch;
+      font-size: 19px;
+      text-align: right;
+    }
+    .surface {
+      border: 2px solid var(--cp-border);
+      border-radius: 18px;
+      background: var(--cp-surface);
+      box-shadow: var(--cp-shadow);
     }
 
-    .chain {
-      position: relative;
+    /* Slide 1 */
+    .cover-layout {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.75rem;
-      margin-top: clamp(2rem, 5vh, 4rem);
-      max-width: 1180px;
+      grid-template-columns: minmax(0, 1.34fr) minmax(360px, 0.8fr);
+      gap: 54px;
+      align-items: center;
     }
-    .chain::before {
-      display: none;
+    .cover-copy { padding-right: 8px; }
+    .cover-hook {
+      max-width: 44ch;
+      margin: 0 0 30px;
+      color: var(--cp-text-muted);
+      font-size: 22px;
+      line-height: 1.45;
     }
-    .node {
-      position: relative;
-      min-width: 0;
-      min-height: 8.5rem;
-      padding: 1rem;
-      border: 1px solid var(--cp-border);
-      border-radius: 16px;
+    .speaker {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      width: fit-content;
+      overflow: hidden;
+      border: 2px solid var(--cp-border-strong);
+      border-radius: 13px;
       background: var(--cp-surface);
-      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
     }
-    .node::before {
-      content: attr(data-step);
-      position: relative;
-      z-index: 1;
+    .speaker-mark {
       display: grid;
       place-items: center;
-      width: 3.4rem;
-      height: 3.4rem;
-      margin-bottom: 1rem;
-      border: 4px solid var(--cp-bg);
+      width: 60px;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font: 800 21px Consolas, "Courier New", Courier, monospace;
+    }
+    .speaker-copy { padding: 11px 16px 12px; }
+    .speaker-copy strong { display: block; font-size: 18px; }
+    .speaker-copy span { display: block; margin-top: 2px; color: var(--cp-text-muted); font-size: 15px; }
+    .proof-stack {
+      position: relative;
+      padding: 28px;
+      border: 2px solid var(--cp-border-strong);
+      background:
+        linear-gradient(135deg, var(--cp-highlight), transparent 56%),
+        var(--cp-surface);
+    }
+    .context-file {
+      margin-bottom: 21px;
+      padding: 18px 20px;
+      border: 2px solid var(--cp-accent);
+      border-radius: 13px;
+      background: var(--cp-code);
+      color: var(--cp-code-text);
+    }
+    .context-file .file-label {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--cp-accent);
+      font: 750 13px Consolas, "Courier New", Courier, monospace;
+    }
+    .context-file strong { font-size: 27px; letter-spacing: -0.02em; }
+    .proof-list { display: grid; gap: 10px; }
+    .proof {
+      display: grid;
+      grid-template-columns: 39px 1fr auto;
+      gap: 11px;
+      align-items: center;
+      min-height: 50px;
+      padding: 8px 11px;
+      border: 1px solid var(--cp-border);
+      border-radius: 11px;
+      background: var(--cp-bg-elevated);
+    }
+    .proof b {
+      display: grid;
+      place-items: center;
+      width: 31px;
+      height: 31px;
       border-radius: 50%;
       background: var(--cp-accent);
       color: var(--cp-accent-fg);
-      font: 700 0.9rem Consolas, "Courier New", Courier, monospace;
+      font: 800 12px Consolas, "Courier New", Courier, monospace;
     }
-    .node.danger::before { background: var(--cp-danger); color: var(--cp-accent-fg); }
-    .node.success::before { background: var(--cp-success); color: var(--cp-accent-fg); }
-    .node h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
-    .node p { margin: 0; color: var(--cp-text-muted); font-size: 0.92rem; line-height: 1.45; }
-    .node:nth-child(4) { grid-column: 3; }
-    .node:nth-child(5) { grid-column: 2; grid-row: 2; }
-    .node:nth-child(6) { grid-column: 1; grid-row: 2; }
-    .chain-caption {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-top: 1.5rem;
+    .proof strong { font-size: 17px; }
+    .proof span { color: var(--cp-text-muted); font: 700 14px Consolas, "Courier New", Courier, monospace; }
+
+    /* Slide 2 */
+    .apm-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(390px, 0.88fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+    .capabilities {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 17px;
+    }
+    .capability {
+      position: relative;
+      min-height: 119px;
+      padding: 16px 16px 14px 58px;
+      border: 2px solid var(--cp-border);
+      border-radius: 12px;
+      background: var(--cp-bg-elevated);
+    }
+    .capability .number {
+      position: absolute;
+      top: 16px;
+      left: 15px;
+      display: grid;
+      place-items: center;
+      width: 31px;
+      height: 31px;
+      border-radius: 8px;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font: 800 12px Consolas, "Courier New", Courier, monospace;
+    }
+    .capability h3 { font-size: 18px; }
+    .capability p {
+      margin: 0;
       color: var(--cp-text-muted);
-      font: 600 clamp(0.85rem, 1.4vw, 1rem) Consolas, "Courier New", Courier, monospace;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+    .asset-map {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 13px;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .apm-core {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 18px;
+      border-radius: 13px;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+    }
+    .apm-core strong { font-size: 25px; }
+    .apm-core span { font: 750 14px Consolas, "Courier New", Courier, monospace; }
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .asset {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 10px 12px;
+      border: 2px solid var(--cp-border);
+      border-radius: 11px;
+      background: var(--cp-bg-elevated);
+      font-size: 17px;
+      font-weight: 720;
+    }
+    .asset:last-child { grid-column: 1 / -1; }
+    .asset i {
+      display: grid;
+      place-items: center;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      background: var(--cp-accent-soft);
+      color: var(--cp-accent);
+      font: normal 800 12px Consolas, "Courier New", Courier, monospace;
+    }
+    .native-path {
+      padding: 11px 13px;
+      border: 1px dashed var(--cp-border-strong);
+      border-radius: 10px;
+      color: var(--cp-text-muted);
+      text-align: center;
+      font: 720 14px Consolas, "Courier New", Courier, monospace;
     }
 
-    .gate-grid {
-      display: block;
-      margin-top: clamp(1.5rem, 4vh, 3rem);
-      max-width: 1260px;
+    /* Slide 3 */
+    .command-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 15px;
+      padding: 15px 18px;
+      border: 2px solid var(--cp-border-strong);
+      border-radius: 13px;
+      background: var(--cp-code);
+      color: var(--cp-code-text);
+      font: 700 16px/1.35 Consolas, "Courier New", Courier, monospace;
     }
-    .flow {
+    .command-bar .prompt { color: var(--cp-accent); }
+    .consume-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+    .consume-step {
+      position: relative;
+      min-height: 142px;
+      padding: 18px 17px 16px;
+      border: 2px solid var(--cp-border);
+      border-radius: 14px;
+      background: var(--cp-surface);
+    }
+    .consume-step .step-tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--cp-accent);
+      font: 800 12px Consolas, "Courier New", Courier, monospace;
+    }
+    .consume-step p {
+      margin: 0;
+      color: var(--cp-text-muted);
+      font-size: 15px;
+      line-height: 1.42;
+    }
+    .consume-step code {
+      display: inline-block;
+      margin-top: 9px;
+      color: var(--cp-text);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .evidence-rail {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.75rem;
-      padding: 1.25rem;
-      border: 1px solid var(--cp-border);
-      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid var(--cp-border-strong);
+      border-radius: 13px;
       background: var(--cp-surface);
-      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
     }
-    .flow-step {
+    .evidence {
       position: relative;
-      min-width: 0;
-      min-height: 9.5rem;
-      padding: 1rem;
-      border: 1px solid var(--cp-border);
-      border-radius: 0.625rem;
-      background: var(--cp-surface-soft);
+      min-height: 88px;
+      padding: 13px 29px 12px 14px;
+      border-right: 1px solid var(--cp-border);
     }
-    .flow-step:not(:last-child)::after {
+    .evidence:last-child { border-right: 0; }
+    .evidence:not(:last-child)::after {
       content: "\2192";
       position: absolute;
-      right: -0.72rem;
       top: 50%;
+      right: -13px;
       z-index: 2;
       display: grid;
       place-items: center;
-      width: 1.45rem;
-      height: 1.45rem;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       background: var(--cp-accent);
       color: var(--cp-accent-fg);
       transform: translateY(-50%);
+      font-weight: 800;
     }
-    .flow-step .mini {
+    .evidence small {
+      display: block;
+      margin-bottom: 5px;
       color: var(--cp-accent);
-      font: 700 0.72rem Consolas, "Courier New", Courier, monospace;
-      letter-spacing: 0.08em;
+      font: 800 12px Consolas, "Courier New", Courier, monospace;
       text-transform: uppercase;
     }
-    .flow-step h3 { margin: 0.65rem 0 0.45rem; font-size: 1rem; }
-    .flow-step p { margin: 0; color: var(--cp-text-muted); font-size: 0.86rem; line-height: 1.4; }
-    .flow-step.result {
-      border: 2px solid var(--cp-success);
-      background: var(--cp-surface);
-    }
-    .flow-step.result .mini,
-    .flow-step.result h3 { color: var(--cp-success); }
-    .required {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 1.4rem;
-      border: 2px solid var(--cp-success);
-      border-radius: 16px;
-      background: var(--cp-surface);
-    }
-    .required .status {
-      color: var(--cp-success);
-      font: 800 clamp(2.3rem, 4.4vw, 4rem) Consolas, "Courier New", Courier, monospace;
-      letter-spacing: -0.06em;
-    }
-    .required p { margin: 0; color: var(--cp-text-muted); line-height: 1.45; }
-    .protections {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      margin-top: 0.75rem;
-    }
-    .protection {
-      padding: 0.8rem;
-      border: 1px dashed var(--cp-border-strong);
-      border-radius: 0.625rem;
-      color: var(--cp-text-muted);
-      text-align: center;
-      font: 600 0.78rem Consolas, "Courier New", Courier, monospace;
-    }
+    .evidence strong { display: block; font-size: 16px; line-height: 1.25; }
+    .evidence span { color: var(--cp-text-muted); font-size: 14px; }
 
-    .closing-grid {
+    /* Slide 4 */
+    .govern-chain {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.85rem;
-      margin: clamp(2rem, 5vh, 4rem) 0 2rem;
-      max-width: 1200px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 11px;
+      margin-bottom: 15px;
     }
-    .closing-word {
-      padding: 1.4rem 1rem;
-      border: 1px solid var(--cp-border);
-      border-radius: 16px;
+    .govern-node {
+      position: relative;
+      min-height: 194px;
+      padding: 17px 15px 15px;
+      border: 2px solid var(--cp-border);
+      border-radius: 15px;
       background: var(--cp-surface);
-      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
-      text-align: center;
-      font-size: clamp(1.25rem, 2.4vw, 2rem);
-      font-weight: 720;
     }
-    .closing-word span {
-      display: block;
-      margin-top: 0.45rem;
-      color: var(--cp-text-muted);
-      font: 500 0.76rem Consolas, "Courier New", Courier, monospace;
+    .govern-node:not(:last-child)::after {
+      content: "\2192";
+      position: absolute;
+      top: 88px;
+      right: -20px;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--cp-bg);
+      border-radius: 50%;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font-weight: 850;
     }
-    .closing-word:last-child {
-      border: 2px solid var(--cp-accent);
+    .govern-node .node-icon {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      margin-bottom: 14px;
+      border-radius: 11px;
+      background: var(--cp-accent-soft);
       color: var(--cp-accent);
+      font: 850 15px Consolas, "Courier New", Courier, monospace;
     }
-    .repo-link {
-      display: inline-flex;
-      align-items: center;
-      width: fit-content;
-      min-height: 3rem;
-      padding: 0.7rem 1rem;
-      border: 1px solid var(--cp-border);
-      border-radius: 0.625rem;
+    .govern-node h3 { font-size: 18px; }
+    .govern-node p {
+      margin: 0 0 10px;
+      color: var(--cp-text-muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .govern-node code {
+      display: block;
+      padding: 8px 9px;
+      border-radius: 8px;
+      background: var(--cp-code);
+      color: var(--cp-code-text);
+      font-size: 12px;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+    .trust-boundary {
+      display: grid;
+      grid-template-columns: 1.35fr 0.9fr;
+      gap: 12px;
+    }
+    .boundary {
+      min-height: 67px;
+      padding: 13px 16px;
+      border: 2px solid var(--cp-success);
+      border-radius: 12px;
       background: var(--cp-surface);
+    }
+    .boundary strong { display: block; margin-bottom: 3px; color: var(--cp-success); font-size: 16px; }
+    .boundary span { color: var(--cp-text-muted); font-size: 14px; }
+    .boundary.admin {
+      border-color: var(--cp-border-strong);
+    }
+    .boundary.admin strong { color: var(--cp-text); }
+
+    /* Slide 5 */
+    .close-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(470px, 0.92fr);
+      gap: 30px;
+      align-items: center;
+    }
+    .close-title {
+      max-width: 12ch;
+      margin: 0 0 21px;
+      font-size: 54px;
+      line-height: 1.02;
+      letter-spacing: -0.048em;
+    }
+    .four-proofs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 540px;
+    }
+    .final-proof {
+      padding: 13px 15px;
+      border: 2px solid var(--cp-border);
+      border-radius: 11px;
+      background: var(--cp-surface);
+    }
+    .final-proof strong { display: block; font-size: 19px; }
+    .final-proof span { color: var(--cp-text-muted); font-size: 12px; }
+    .resource-card {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 20px;
+      border: 2px solid var(--cp-border-strong);
+    }
+    .qr-wrap {
+      display: grid;
+      place-items: center;
+      width: 190px;
+      height: 190px;
+      padding: 8px;
+      border: 2px solid #1a1117;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #09070a;
+    }
+    .qr-wrap svg { display: block; width: 100%; height: 100%; }
+    .resources h3 { margin-bottom: 12px; font-size: 20px; }
+    .resource-links { display: grid; gap: 9px; }
+    .resource-link {
+      display: block;
+      padding: 8px 9px;
+      border: 1px solid var(--cp-border);
+      border-radius: 8px;
+      background: var(--cp-bg-elevated);
       color: var(--cp-link);
       text-decoration: none;
-      font: 600 clamp(0.85rem, 1.4vw, 1rem) Consolas, "Courier New", Courier, monospace;
+      font: 700 14px/1.25 Consolas, "Courier New", Courier, monospace;
+      overflow-wrap: anywhere;
+    }
+    .resource-link:hover { border-color: var(--cp-link); }
+    .linkedin-label {
+      margin: 11px 0 0;
+      color: var(--cp-text-muted);
+      font-size: 14px;
+      line-height: 1.35;
     }
 
     .hud {
       position: fixed;
       z-index: 20;
-      left: 1rem;
-      right: 1rem;
-      bottom: 0.75rem;
-      display: flex;
+      left: 18px;
+      right: 24px;
+      bottom: 10px;
+      display: none;
       align-items: center;
-      gap: 0.75rem;
+      justify-content: flex-end;
+      gap: 10px;
       color: var(--cp-text-muted);
-      font: 600 0.76rem Consolas, "Courier New", Courier, monospace;
+      font: 700 11px Consolas, "Courier New", Courier, monospace;
     }
     .progress {
       display: flex;
-      flex: 1;
-      gap: 0.3rem;
-      max-width: 18rem;
+      width: 150px;
+      gap: 4px;
+      margin-right: auto;
     }
     .progress i {
       flex: 1;
       height: 4px;
-      border-radius: 0.625rem;
+      border-radius: 99px;
       background: var(--cp-border);
     }
     .progress i.done { background: var(--cp-accent); }
     .hud button {
+      padding: 3px 5px;
       border: 0;
       background: transparent;
       color: var(--cp-text-muted);
@@ -449,45 +649,45 @@
     .notes-panel {
       position: fixed;
       z-index: 30;
-      top: 1rem;
-      right: 1rem;
-      bottom: 2.75rem;
+      top: 18px;
+      right: 24px;
+      bottom: 36px;
       display: none;
-      width: min(34rem, calc(100vw - 2rem));
+      width: min(470px, calc(100vw - 48px));
       overflow: auto;
-      padding: 1.1rem 1.25rem;
-      border: 1px solid var(--cp-border);
-      border-radius: 16px;
+      padding: 18px 20px;
+      border: 2px solid var(--cp-border-strong);
+      border-radius: 14px;
       background: var(--cp-panel-strong);
       box-shadow: var(--cp-shadow);
     }
     .notes-panel.open { display: block; }
-    .notes-panel h3 { margin: 0 0 0.75rem; font-size: 1rem; }
-    .notes-panel p, .notes-panel li { color: var(--cp-text-muted); line-height: 1.5; }
+    .notes-panel h3 { margin: 0 0 8px; }
+    .notes-panel p, .notes-panel li {
+      color: var(--cp-text-muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
     .notes-panel .time {
       display: inline-block;
-      margin-bottom: 0.8rem;
+      margin-bottom: 8px;
       color: var(--cp-accent);
-      font: 700 0.78rem Consolas, "Courier New", Courier, monospace;
+      font: 800 12px Consolas, "Courier New", Courier, monospace;
     }
 
     @media (max-width: 980px) {
-      .node { min-height: 8rem; }
-      .gate-grid { grid-template-columns: 1fr; }
-      .flow { grid-template-columns: repeat(2, 1fr); }
-      .closing-grid { grid-template-columns: repeat(2, 1fr); }
+      .cover-layout, .apm-layout, .close-layout { grid-template-columns: 1fr; }
+      .proof-stack, .asset-map, .resource-card { display: none; }
+      .govern-chain, .consume-steps { grid-template-columns: repeat(2, 1fr); }
+      .evidence-rail { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-height: 760px) {
-      .slide { padding: 1.5rem 2.25rem 2.4rem; }
-      h1 { font-size: clamp(2.6rem, 5.4vw, 4.6rem); }
-      h2 { font-size: clamp(2rem, 3.6vw, 3.25rem); }
-      .lead { font-size: clamp(1rem, 1.7vw, 1.3rem); }
-      .contrast { margin-top: 1.5rem; }
-      .chain { margin-top: 1.3rem; }
-      .node { min-height: 6.8rem; padding: 0.8rem; }
-      .node::before { width: 2.8rem; height: 2.8rem; margin-bottom: 0.6rem; }
-      .flow-step { min-height: 7.4rem; }
-      .closing-grid { margin: 1.5rem 0; }
+    @media (max-height: 740px) {
+      .slide { padding-top: 34px; padding-bottom: 46px; }
+      .section-head { margin-bottom: 20px; }
+      .cover-layout { gap: 42px; }
+      .capability { min-height: 108px; }
+      .consume-step { min-height: 132px; }
+      .govern-node { min-height: 181px; }
     }
     @media print {
       body { overflow: visible; }
@@ -507,166 +707,239 @@
   <main class="deck" aria-live="polite">
     <section class="slide active" data-title="Title">
       <div class="frame">
-        <p class="eyebrow">Meridian / 30-minute live build</p>
-        <h1>Build a Supply Chain<br><span class="accent">for Agent Context</span></h1>
-        <p class="lead">Source approved skills. Pin the release. Verify every deployed byte. Make policy a required CI check.</p>
-        <div class="contrast" aria-label="Software dependencies versus agent context">
-          <div class="supply-card">
-            <div class="label">software dependency</div>
-            <div class="checks">
-              <span class="check">&#10003; signed</span>
-              <span class="check">&#10003; pinned</span>
-              <span class="check">&#10003; scanned</span>
+        <div class="cover-layout">
+          <div class="cover-copy">
+            <h1>Build a Supply Chain <span class="accent">for Agent Context</span></h1>
+            <p class="cover-hook">Your dependencies have provenance, pins, hashes, and gates. Your agent context deserves the same controls.</p>
+            <div class="speaker" aria-label="Speaker">
+              <div class="speaker-mark">MS</div>
+              <div class="speaker-copy">
+                <strong>Maxim Salnikov</strong>
+                <span>AI-Native Solution Engineer &middot; Microsoft</span>
+              </div>
             </div>
           </div>
-          <div class="versus">VS</div>
-          <div class="supply-card">
-            <div class="label">downloaded SKILL.md</div>
-            <div class="checks">
-              <span class="check missing">? owner</span>
-              <span class="check missing">? version</span>
-              <span class="check missing">? integrity</span>
+          <div class="proof-stack surface" aria-label="Four supply-chain proofs">
+            <div class="context-file">
+              <span class="file-label">AGENT CONTEXT</span>
+              <strong>SKILL.md is an input.</strong>
+            </div>
+            <div class="proof-list">
+              <div class="proof"><b>01</b><strong>Owner</strong><span>source</span></div>
+              <div class="proof"><b>02</b><strong>Version</strong><span>pin</span></div>
+              <div class="proof"><b>03</b><strong>Hash</strong><span>verify</span></div>
+              <div class="proof"><b>04</b><strong>Gate</strong><span>enforce</span></div>
             </div>
           </div>
-        </div>
-        <div class="meta">
-          <span class="chip strong">APM = Agent Package Manager</span>
-          <span class="chip">Maxim Salnikov</span>
-          <span class="chip">live demo + recovery checkpoints</span>
         </div>
       </div>
       <aside class="notes-source">
         <span class="time">00:00-01:20</span>
-        <h3>Hook, then leave the deck</h3>
-        <p>You would never pipe a random internet script into the build. Copying a SKILL.md into an agent is the same supply-chain decision, disguised as text.</p>
-        <ul>
-          <li>Meridian already signs, pins, and scans application dependencies.</li>
-          <li>Promise four proofs: owner, version, hash, gate.</li>
-          <li>Switch to VS Code at 01:20. Do not explain APM architecture here.</li>
-        </ul>
+        <h3>The supply-chain gap</h3>
+        <p>A friendly Markdown file can influence an agent that edits code and calls tools. Promise four proofs: owner, version, hash, gate.</p>
       </aside>
     </section>
 
-    <section class="slide" data-title="Supply-chain route">
+    <section class="slide" data-title="What APM manages">
       <div class="frame">
-        <p class="eyebrow">The route / one skill, end to end</p>
-        <h2>Trust moves left.<br><span class="accent">Consistency moves right.</span></h2>
-        <div class="chain" aria-label="Agent context supply chain">
-          <article class="node danger" data-step="01">
-            <h3>Quarantine</h3>
-            <p>Unowned internet skill. Hidden Unicode found.</p>
-          </article>
-          <article class="node" data-step="02">
-            <h3>Review</h3>
-            <p>Narrow behavior, named owner, CODEOWNERS.</p>
-          </article>
-          <article class="node" data-step="03">
-            <h3>Release</h3>
-            <p>Trusted catalog tag: <span class="mono">v1.0.0</span>.</p>
-          </article>
-          <article class="node" data-step="04">
-            <h3>Declare</h3>
-            <p><span class="mono">apm.yml</span> pins the approved source.</p>
-          </article>
-          <article class="node" data-step="05">
-            <h3>Resolve</h3>
-            <p>Commit + package and deployed-file hashes.</p>
-          </article>
-          <article class="node success" data-step="06">
-            <h3>Deploy</h3>
-            <p>Copilot, Claude, Cursor. One dependency.</p>
-          </article>
+        <div class="section-head">
+          <div>
+            <p class="kicker">Agent Package Manager</p>
+            <h2>Package context.<br><span class="accent">Deploy it natively.</span></h2>
+          </div>
+          <p class="lead">One manifest describes the context. APM resolves, adapts, and audits what each harness receives.</p>
         </div>
-        <div class="chain-caption">
-          <span>reviewed source &rarr; immutable resolution &rarr; native harness paths</span>
-          <span>policy surrounds the whole route</span>
-        </div>
-      </div>
-      <aside class="notes-source">
-        <span class="time">04:30-05:30</span>
-        <h3>Name the artifacts, then return to VS Code</h3>
-        <p>The release is the trusted source. The manifest is intent. The lockfile is evidence. Policy decides whether the source is allowed.</p>
-        <ul>
-          <li>Do not explain every node for more than one sentence.</li>
-          <li>Switch to .demo-live/meridian-checkout/apm.yml.</li>
-        </ul>
-      </aside>
-    </section>
-
-    <section class="slide" data-title="Required CI gate">
-      <div class="frame">
-        <p class="eyebrow">The trust boundary / required CI</p>
-        <h2>Local checks are optional.<br><span class="accent">Required CI is governance.</span></h2>
-        <div class="gate-grid">
-          <div class="flow" aria-label="Pull request audit flow">
-            <article class="flow-step">
-              <span class="mini">change</span>
-              <h3>Pull request</h3>
-              <p>Manifest, lockfile, policy, or deployed context.</p>
+        <div class="apm-layout">
+          <div class="capabilities surface" aria-label="APM capabilities">
+            <article class="capability">
+              <span class="number">01</span>
+              <h3>Source + install</h3>
+              <p>Address a repository, subdirectory, or individual primitive.</p>
             </article>
-            <article class="flow-step">
-              <span class="mini">immutable</span>
-              <h3>Pinned tooling</h3>
-              <p>Action commits and APM CLI <span class="mono">0.28.0</span>.</p>
+            <article class="capability">
+              <span class="number">02</span>
+              <h3>Pin + lock + hash</h3>
+              <p>Resolve human versions to commits and deployed-content hashes.</p>
             </article>
-            <article class="flow-step">
-              <span class="mini">fail closed</span>
-              <h3>Audit + policy</h3>
-              <p>Source, refs, hashes, Unicode, drift, allowlist.</p>
+            <article class="capability">
+              <span class="number">03</span>
+              <h3>Deploy per harness</h3>
+              <p>Write the native paths expected by Copilot, Claude, Cursor, and more.</p>
             </article>
-            <article class="flow-step result">
-              <span class="mini">&#10003; required status</span>
-              <h3>CI gate passed</h3>
-              <p>31 checks. Merge is enabled only after this result.</p>
+            <article class="capability">
+              <span class="number">04</span>
+              <h3>Audit + govern</h3>
+              <p>Validate integrity, drift, source policy, and CI compliance.</p>
             </article>
           </div>
-          <div class="protections" aria-label="Separately protected control files">
-            <div class="protection">workflow / reviewed</div>
-            <div class="protection">policy / CODEOWNERS</div>
-            <div class="protection">catalog / tagged</div>
+          <div class="asset-map surface" aria-label="Managed agent context assets">
+            <div class="apm-core">
+              <strong>apm.yml</strong>
+              <span>DECLARED CONTEXT</span>
+            </div>
+            <div class="asset-grid">
+              <div class="asset"><i>S</i>Skills</div>
+              <div class="asset"><i>P</i>Prompts</div>
+              <div class="asset"><i>I</i>Instructions</div>
+              <div class="asset"><i>X</i>Plugins</div>
+              <div class="asset"><i>M</i>MCP servers</div>
+            </div>
+            <div class="native-path">manifest &rarr; lockfile &rarr; harness-native paths</div>
           </div>
         </div>
       </div>
       <aside class="notes-source">
-        <span class="time">18:30-19:30</span>
-        <h3>Set up the repository-boundary argument</h3>
-        <p>A developer can skip a local command. They cannot merge around a required check without authority to change the separately protected workflow or policy.</p>
-        <ul>
-          <li>Call out immutable action, pinned CLI, blocking policy, required status.</li>
-          <li>Accurate boundary: organization administrators remain ultimate authority.</li>
-          <li>Switch to .github/workflows/apm-supply-chain.yml.</li>
-        </ul>
+        <span class="time">01:20-02:35</span>
+        <h3>Skip installation; show where APM helps</h3>
+        <p>Installation is well documented. Move directly to source, resolution, harness adaptation, and governance.</p>
       </aside>
     </section>
 
-    <section class="slide" data-title="Close">
+    <section class="slide" data-title="Consuming APM">
       <div class="frame">
-        <p class="eyebrow">The dependency test</p>
-        <h2>The skill is no longer copied.<br><span class="accent">It is a governed dependency.</span></h2>
-        <div class="closing-grid">
-          <div class="closing-word">Owner<span>reviewed source</span></div>
-          <div class="closing-word">Version<span>pinned release</span></div>
-          <div class="closing-word">Hash<span>resolved evidence</span></div>
-          <div class="closing-word">Gate<span>required policy check</span></div>
+        <div class="section-head">
+          <div>
+            <p class="kicker">Consume</p>
+            <h2>Install once.<br><span class="accent">Reproduce everywhere.</span></h2>
+          </div>
+          <p class="lead">Individual experiment &rarr; team manifest &rarr; immutable evidence.</p>
         </div>
-        <div class="meta">
-          <a class="repo-link" href="https://github.com/webmaxru/meridian-agent-context-demo">github.com/webmaxru/meridian-agent-context-demo</a>
-          <span class="chip">microsoft.github.io/apm</span>
+        <div class="command-bar" aria-label="Direct skill install command">
+          <span class="prompt">&gt;</span>
+          <span>apm install 'webmaxru/ai-native-dev/skills/agent-package-manager#v1.9.0'</span>
+        </div>
+        <div class="consume-steps">
+          <article class="consume-step">
+            <span class="step-tag">01 / ADDRESS</span>
+            <h3>One released skill</h3>
+            <p>Try one independently versioned primitive without copying the repository.</p>
+            <code>skill#v1.9.0</code>
+          </article>
+          <article class="consume-step">
+            <span class="step-tag">02 / DECLARE</span>
+            <h3>One team manifest</h3>
+            <p>Four skills + one prompt. Mix readable release pins with immutable full SHAs.</p>
+            <code>apm.yml &rarr; 3 targets</code>
+          </article>
+          <article class="consume-step">
+            <span class="step-tag">03 / REPLAY</span>
+            <h3>One exact resolution</h3>
+            <p>Commit the lock, replay it frozen, and audit the native deployment for drift.</p>
+            <code>apm install --frozen</code>
+          </article>
+        </div>
+        <div class="evidence-rail" aria-label="Reproducibility evidence">
+          <div class="evidence"><small>declared</small><strong>tag or full SHA</strong><span>human intent</span></div>
+          <div class="evidence"><small>resolved</small><strong>exact commit</strong><span>immutable source</span></div>
+          <div class="evidence"><small>verified</small><strong>content hashes</strong><span>package + deployment</span></div>
+          <div class="evidence"><small>deployed</small><strong>Copilot &middot; Claude &middot; Cursor</strong><span>native paths</span></div>
+        </div>
+      </div>
+      <aside class="notes-source">
+        <span class="time">02:35-11:30</span>
+        <h3>Three consuming beats</h3>
+        <p>Direct install, prepared multi-asset manifest, then lock fields and frozen replay. Switch to VS Code after the preview.</p>
+      </aside>
+    </section>
+
+    <section class="slide" data-title="Governing APM">
+      <div class="frame">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Govern</p>
+            <h2>Govern the source.<br><span class="accent">Require the proof.</span></h2>
+          </div>
+          <p class="lead">The policy is local. The source is private. The merge decision is enforced in CI.</p>
+        </div>
+        <div class="govern-chain" aria-label="Governance chain">
+          <article class="govern-node">
+            <div class="node-icon">01</div>
+            <h3>Private registry</h3>
+            <p>Meridian owns the reviewed skill and its release.</p>
+            <code>secure-payment-review#v1.0.0</code>
+          </article>
+          <article class="govern-node">
+            <div class="node-icon">02</div>
+            <h3>Blocking policy</h3>
+            <p>Only the approved repository and pinned constraints pass.</p>
+            <code>enforcement: block<br>fetch_failure: block</code>
+          </article>
+          <article class="govern-node">
+            <div class="node-icon">03</div>
+            <h3>Protected credential</h3>
+            <p>A reviewer approves access to the private registry secret.</p>
+            <code>environment: meridian-registry</code>
+          </article>
+          <article class="govern-node">
+            <div class="node-icon">04</div>
+            <h3>Required audit</h3>
+            <p>Pinned tooling runs the same 31 checks before merge.</p>
+            <code>required status: audit</code>
+          </article>
+        </div>
+        <div class="trust-boundary">
+          <div class="boundary">
+            <strong>Ordinary contributor: cannot bypass</strong>
+            <span>No direct push, no merge without audit, owning review, and protected credential approval.</span>
+          </div>
+          <div class="boundary admin">
+            <strong>Ultimate boundary</strong>
+            <span>Repository administrators retain authority.</span>
+          </div>
+        </div>
+      </div>
+      <aside class="notes-source">
+        <span class="time">11:30-24:30</span>
+        <h3>Private source to required status</h3>
+        <p>Demonstrate the successful setup, not a staged failure. Scope the guarantee to ordinary contributors; administrators remain the trust boundary.</p>
+      </aside>
+    </section>
+
+    <section class="slide" data-title="Resources">
+      <div class="frame">
+        <div class="close-layout">
+          <div>
+            <p class="kicker">The dependency test</p>
+            <h2 class="close-title">A real dependency has <span class="accent">four proofs.</span></h2>
+            <div class="four-proofs" aria-label="Four dependency properties">
+              <div class="final-proof"><strong>Owner</strong><span>reviewed source</span></div>
+              <div class="final-proof"><strong>Version</strong><span>declared pin</span></div>
+              <div class="final-proof"><strong>Hash</strong><span>resolved content</span></div>
+              <div class="final-proof"><strong>Gate</strong><span>required audit</span></div>
+            </div>
+          </div>
+          <div class="resource-card surface">
+            <div>
+              <a class="qr-wrap" href="https://www.linkedin.com/in/webmaxru/" aria-label="Open Maxim Salnikov on LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3.3 3.3" role="img" aria-label="QR code for linkedin.com/in/webmaxru">
+                  <path fill="currentColor" d="M0.2,0.2H0.3V0.3H0.2zM0.3,0.2H0.4V0.3H0.3zM0.4,0.2H0.5V0.3H0.4zM0.5,0.2H0.6V0.3H0.5zM0.6,0.2H0.7V0.3H0.6zM0.7,0.2H0.8V0.3H0.7zM0.8,0.2H0.9V0.3H0.8zM1.4,0.2H1.5V0.3H1.4zM1.5,0.2H1.6V0.3H1.5zM1.6,0.2H1.7V0.3H1.6zM1.7,0.2H1.8V0.3H1.7zM1.8,0.2H1.9V0.3H1.8zM1.9,0.2H2V0.3H1.9zM2,0.2H2.1V0.3H2zM2.1,0.2H2.2V0.3H2.1zM2.4,0.2H2.5V0.3H2.4zM2.5,0.2H2.6V0.3H2.5zM2.6,0.2H2.7V0.3H2.6zM2.7,0.2H2.8V0.3H2.7zM2.8,0.2H2.9V0.3H2.8zM2.9,0.2H3V0.3H2.9zM3,0.2H3.1V0.3H3zM0.2,0.3H0.3V0.4H0.2zM0.8,0.3H0.9V0.4H0.8zM1.1,0.3H1.2V0.4H1.1zM1.5,0.3H1.6V0.4H1.5zM1.6,0.3H1.7V0.4H1.6zM1.7,0.3H1.8V0.4H1.7zM2,0.3H2.1V0.4H2zM2.2,0.3H2.3V0.4H2.2zM2.4,0.3H2.5V0.4H2.4zM3,0.3H3.1V0.4H3zM0.2,0.4H0.3V0.5H0.2zM0.4,0.4H0.5V0.5H0.4zM0.5,0.4H0.6V0.5H0.5zM0.6,0.4H0.7V0.5H0.6zM0.8,0.4H0.9V0.5H0.8zM1.1,0.4H1.2V0.5H1.1zM1.3,0.4H1.4V0.5H1.3zM1.6,0.4H1.7V0.5H1.6zM1.9,0.4H2V0.5H1.9zM2.1,0.4H2.2V0.5H2.1zM2.4,0.4H2.5V0.5H2.4zM2.6,0.4H2.7V0.5H2.6zM2.7,0.4H2.8V0.5H2.7zM2.8,0.4H2.9V0.5H2.8zM3,0.4H3.1V0.5H3zM0.2,0.5H0.3V0.6H0.2zM0.4,0.5H0.5V0.6H0.4zM0.5,0.5H0.6V0.6H0.5zM0.6,0.5H0.7V0.6H0.6zM0.8,0.5H0.9V0.6H0.8zM1.1,0.5H1.2V0.6H1.1zM1.2,0.5H1.3V0.6H1.2zM1.5,0.5H1.6V0.6H1.5zM1.7,0.5H1.8V0.6H1.7zM1.8,0.5H1.9V0.6H1.8zM2,0.5H2.1V0.6H2zM2.1,0.5H2.2V0.6H2.1zM2.4,0.5H2.5V0.6H2.4zM2.6,0.5H2.7V0.6H2.6zM2.7,0.5H2.8V0.6H2.7zM2.8,0.5H2.9V0.6H2.8zM3,0.5H3.1V0.6H3zM0.2,0.6H0.3V0.7H0.2zM0.4,0.6H0.5V0.7H0.4zM0.5,0.6H0.6V0.7H0.5zM0.6,0.6H0.7V0.7H0.6zM0.8,0.6H0.9V0.7H0.8zM1.1,0.6H1.2V0.7H1.1zM1.3,0.6H1.4V0.7H1.3zM1.6,0.6H1.7V0.7H1.6zM1.7,0.6H1.8V0.7H1.7zM1.8,0.6H1.9V0.7H1.8zM1.9,0.6H2V0.7H1.9zM2,0.6H2.1V0.7H2zM2.4,0.6H2.5V0.7H2.4zM2.6,0.6H2.7V0.7H2.6zM2.7,0.6H2.8V0.7H2.7zM2.8,0.6H2.9V0.7H2.8zM3,0.6H3.1V0.7H3zM0.2,0.7H0.3V0.8H0.2zM0.8,0.7H0.9V0.8H0.8zM1,0.7H1.1V0.8H1zM1.2,0.7H1.3V0.8H1.2zM1.3,0.7H1.4V0.8H1.3zM1.7,0.7H1.8V0.8H1.7zM2,0.7H2.1V0.8H2zM2.1,0.7H2.2V0.8H2.1zM2.2,0.7H2.3V0.8H2.2zM2.4,0.7H2.5V0.8H2.4zM3,0.7H3.1V0.8H3zM0.2,0.8H0.3V0.9H0.2zM0.3,0.8H0.4V0.9H0.3zM0.4,0.8H0.5V0.9H0.4zM0.5,0.8H0.6V0.9H0.5zM0.6,0.8H0.7V0.9H0.6zM0.7,0.8H0.8V0.9H0.7zM0.8,0.8H0.9V0.9H0.8zM1,0.8H1.1V0.9H1zM1.2,0.8H1.3V0.9H1.2zM1.4,0.8H1.5V0.9H1.4zM1.6,0.8H1.7V0.9H1.6zM1.8,0.8H1.9V0.9H1.8zM2,0.8H2.1V0.9H2zM2.2,0.8H2.3V0.9H2.2zM2.4,0.8H2.5V0.9H2.4zM2.5,0.8H2.6V0.9H2.5zM2.6,0.8H2.7V0.9H2.6zM2.7,0.8H2.8V0.9H2.7zM2.8,0.8H2.9V0.9H2.8zM2.9,0.8H3V0.9H2.9zM3,0.8H3.1V0.9H3zM1.1,0.9H1.2V1H1.1zM1.3,0.9H1.4V1H1.3zM1.4,0.9H1.5V1H1.4zM1.5,0.9H1.6V1H1.5zM1.8,0.9H1.9V1H1.8zM1.9,0.9H2V1H1.9zM2,0.9H2.1V1H2zM2.1,0.9H2.2V1H2.1zM2.2,0.9H2.3V1H2.2zM0.2,1H0.3V1.1H0.2zM0.5,1H0.6V1.1H0.5zM0.7,1H0.8V1.1H0.7zM0.8,1H0.9V1.1H0.8zM1,1H1.1V1.1H1zM1.1,1H1.2V1.1H1.1zM1.2,1H1.3V1.1H1.2zM1.3,1H1.4V1.1H1.3zM1.6,1H1.7V1.1H1.6zM2,1H2.1V1.1H2zM2.1,1H2.2V1.1H2.1zM2.3,1H2.4V1.1H2.3zM2.5,1H2.6V1.1H2.5zM0.3,1.1H0.4V1.2H0.3zM0.4,1.1H0.5V1.2H0.4zM0.6,1.1H0.7V1.2H0.6zM0.7,1.1H0.8V1.2H0.7zM1.5,1.1H1.6V1.2H1.5zM1.8,1.1H1.9V1.2H1.8zM2.3,1.1H2.4V1.2H2.3zM2.4,1.1H2.5V1.2H2.4zM2.7,1.1H2.8V1.2H2.7zM3,1.1H3.1V1.2H3zM0.8,1.2H0.9V1.3H0.8zM1,1.2H1.1V1.3H1zM1.2,1.2H1.3V1.3H1.2zM1.3,1.2H1.4V1.3H1.3zM1.5,1.2H1.6V1.3H1.5zM1.6,1.2H1.7V1.3H1.6zM1.9,1.2H2V1.3H1.9zM2.1,1.2H2.2V1.3H2.1zM2.2,1.2H2.3V1.3H2.2zM2.3,1.2H2.4V1.3H2.3zM2.4,1.2H2.5V1.3H2.4zM2.7,1.2H2.8V1.3H2.7zM2.8,1.2H2.9V1.3H2.8zM2.9,1.2H3V1.3H2.9zM0.2,1.3H0.3V1.4H0.2zM0.5,1.3H0.6V1.4H0.5zM1,1.3H1.1V1.4H1zM1.3,1.3H1.4V1.4H1.3zM1.5,1.3H1.6V1.4H1.5zM1.7,1.3H1.8V1.4H1.7zM2,1.3H2.1V1.4H2zM2.3,1.3H2.4V1.4H2.3zM2.5,1.3H2.6V1.4H2.5zM2.6,1.3H2.7V1.4H2.6zM2.8,1.3H2.9V1.4H2.8zM2.9,1.3H3V1.4H2.9zM0.2,1.4H0.3V1.5H0.2zM0.4,1.4H0.5V1.5H0.4zM0.5,1.4H0.6V1.5H0.5zM0.6,1.4H0.7V1.5H0.6zM0.7,1.4H0.8V1.5H0.7zM0.8,1.4H0.9V1.5H0.8zM0.9,1.4H1V1.5H0.9zM1.2,1.4H1.3V1.5H1.2zM1.6,1.4H1.7V1.5H1.6zM1.7,1.4H1.8V1.5H1.7zM1.9,1.4H2V1.5H1.9zM2.1,1.4H2.2V1.5H2.1zM2.2,1.4H2.3V1.5H2.2zM2.3,1.4H2.4V1.5H2.3zM2.4,1.4H2.5V1.5H2.4zM2.7,1.4H2.8V1.5H2.7zM2.9,1.4H3V1.5H2.9zM3,1.4H3.1V1.5H3zM0.2,1.5H0.3V1.6H0.2zM0.3,1.5H0.4V1.6H0.3zM0.4,1.5H0.5V1.6H0.4zM0.5,1.5H0.6V1.6H0.5zM0.7,1.5H0.8V1.6H0.7zM1.1,1.5H1.2V1.6H1.1zM1.2,1.5H1.3V1.6H1.2zM1.3,1.5H1.4V1.6H1.3zM1.4,1.5H1.5V1.6H1.4zM1.5,1.5H1.6V1.6H1.5zM1.6,1.5H1.7V1.6H1.6zM2.1,1.5H2.2V1.6H2.1zM2.2,1.5H2.3V1.6H2.2zM2.3,1.5H2.4V1.6H2.3zM2.5,1.5H2.6V1.6H2.5zM0.2,1.6H0.3V1.7H0.2zM0.5,1.6H0.6V1.7H0.5zM0.6,1.6H0.7V1.7H0.6zM0.8,1.6H0.9V1.7H0.8zM0.9,1.6H1V1.7H0.9zM1.2,1.6H1.3V1.7H1.2zM1.5,1.6H1.6V1.7H1.5zM1.6,1.6H1.7V1.7H1.6zM1.9,1.6H2V1.7H1.9zM2,1.6H2.1V1.7H2zM2.2,1.6H2.3V1.7H2.2zM2.7,1.6H2.8V1.7H2.7zM2.8,1.6H2.9V1.7H2.8zM2.9,1.6H3V1.7H2.9zM3,1.6H3.1V1.7H3zM0.3,1.7H0.4V1.8H0.3zM0.4,1.7H0.5V1.8H0.4zM0.5,1.7H0.6V1.8H0.5zM0.6,1.7H0.7V1.8H0.6zM0.7,1.7H0.8V1.8H0.7zM1,1.7H1.1V1.8H1zM1.4,1.7H1.5V1.8H1.4zM1.7,1.7H1.8V1.8H1.7zM1.9,1.7H2V1.8H1.9zM2,1.7H2.1V1.8H2zM2.1,1.7H2.2V1.8H2.1zM2.7,1.7H2.8V1.8H2.7zM2.9,1.7H3V1.8H2.9zM0.5,1.8H0.6V1.9H0.5zM0.6,1.8H0.7V1.9H0.6zM0.7,1.8H0.8V1.9H0.7zM0.8,1.8H0.9V1.9H0.8zM0.9,1.8H1V1.9H0.9zM1.1,1.8H1.2V1.9H1.1zM1.3,1.8H1.4V1.9H1.3zM1.4,1.8H1.5V1.9H1.4zM1.5,1.8H1.6V1.9H1.5zM1.9,1.8H2V1.9H1.9zM2.2,1.8H2.3V1.9H2.2zM2.3,1.8H2.4V1.9H2.3zM2.5,1.8H2.6V1.9H2.5zM2.9,1.8H3V1.9H2.9zM0.4,1.9H0.5V2H0.4zM0.5,1.9H0.6V2H0.5zM1,1.9H1.1V2H1zM1.2,1.9H1.3V2H1.2zM1.5,1.9H1.6V2H1.5zM1.6,1.9H1.7V2H1.6zM1.8,1.9H1.9V2H1.8zM1.9,1.9H2V2H1.9zM2.3,1.9H2.4V2H2.3zM2.4,1.9H2.5V2H2.4zM2.5,1.9H2.6V2H2.5zM2.7,1.9H2.8V2H2.7zM3,1.9H3.1V2H3zM0.2,2H0.3V2.1H0.2zM0.4,2H0.5V2.1H0.4zM0.7,2H0.8V2.1H0.7zM0.8,2H0.9V2.1H0.8zM1.1,2H1.2V2.1H1.1zM1.2,2H1.3V2.1H1.2zM1.4,2H1.5V2.1H1.4zM1.6,2H1.7V2.1H1.6zM1.9,2H2V2.1H1.9zM2.2,2H2.3V2.1H2.2zM2.3,2H2.4V2.1H2.3zM2.5,2H2.6V2.1H2.5zM2.9,2H3V2.1H2.9zM3,2H3.1V2.1H3zM0.4,2.1H0.5V2.2H0.4zM1.4,2.1H1.5V2.2H1.4zM1.6,2.1H1.7V2.2H1.6zM1.7,2.1H1.8V2.2H1.7zM1.9,2.1H2V2.2H1.9zM2.2,2.1H2.3V2.2H2.2zM2.3,2.1H2.4V2.2H2.3zM2.9,2.1H3V2.2H2.9zM3,2.1H3.1V2.2H3zM0.2,2.2H0.3V2.3H0.2zM0.4,2.2H0.5V2.3H0.4zM0.5,2.2H0.6V2.3H0.5zM0.6,2.2H0.7V2.3H0.6zM0.8,2.2H0.9V2.3H0.8zM1.3,2.2H1.4V2.3H1.3zM1.4,2.2H1.5V2.3H1.4zM1.7,2.2H1.8V2.3H1.7zM1.8,2.2H1.9V2.3H1.8zM2,2.2H2.1V2.3H2zM2.2,2.2H2.3V2.3H2.2zM2.3,2.2H2.4V2.3H2.3zM2.4,2.2H2.5V2.3H2.4zM2.5,2.2H2.6V2.3H2.5zM2.6,2.2H2.7V2.3H2.6zM2.8,2.2H2.9V2.3H2.8zM1,2.3H1.1V2.4H1zM1.1,2.3H1.2V2.4H1.1zM1.3,2.3H1.4V2.4H1.3zM1.4,2.3H1.5V2.4H1.4zM1.6,2.3H1.7V2.4H1.6zM1.8,2.3H1.9V2.4H1.8zM2.1,2.3H2.2V2.4H2.1zM2.2,2.3H2.3V2.4H2.2zM2.6,2.3H2.7V2.4H2.6zM2.8,2.3H2.9V2.4H2.8zM2.9,2.3H3V2.4H2.9zM3,2.3H3.1V2.4H3zM0.2,2.4H0.3V2.5H0.2zM0.3,2.4H0.4V2.5H0.3zM0.4,2.4H0.5V2.5H0.4zM0.5,2.4H0.6V2.5H0.5zM0.6,2.4H0.7V2.5H0.6zM0.7,2.4H0.8V2.5H0.7zM0.8,2.4H0.9V2.5H0.8zM1.1,2.4H1.2V2.5H1.1zM1.2,2.4H1.3V2.5H1.2zM1.3,2.4H1.4V2.5H1.3zM1.4,2.4H1.5V2.5H1.4zM1.9,2.4H2V2.5H1.9zM2.2,2.4H2.3V2.5H2.2zM2.4,2.4H2.5V2.5H2.4zM2.6,2.4H2.7V2.5H2.6zM2.9,2.4H3V2.5H2.9zM0.2,2.5H0.3V2.6H0.2zM0.8,2.5H0.9V2.6H0.8zM1,2.5H1.1V2.6H1zM1.2,2.5H1.3V2.6H1.2zM1.3,2.5H1.4V2.6H1.3zM1.6,2.5H1.7V2.6H1.6zM2,2.5H2.1V2.6H2zM2.2,2.5H2.3V2.6H2.2zM2.6,2.5H2.7V2.6H2.6zM2.7,2.5H2.8V2.6H2.7zM2.8,2.5H2.9V2.6H2.8zM0.2,2.6H0.3V2.7H0.2zM0.4,2.6H0.5V2.7H0.4zM0.5,2.6H0.6V2.7H0.5zM0.6,2.6H0.7V2.7H0.6zM0.8,2.6H0.9V2.7H0.8zM1.2,2.6H1.3V2.7H1.2zM1.3,2.6H1.4V2.7H1.3zM1.4,2.6H1.5V2.7H1.4zM1.8,2.6H1.9V2.7H1.8zM1.9,2.6H2V2.7H1.9zM2.2,2.6H2.3V2.7H2.2zM2.3,2.6H2.4V2.7H2.3zM2.4,2.6H2.5V2.7H2.4zM2.5,2.6H2.7V2.7H2.5zM2.9,2.6H3.1V2.7H2.9zM0.2,2.7H0.3V2.8H0.2zM0.4,2.7H0.5V2.8H0.4zM0.5,2.7H0.6V2.8H0.5zM0.6,2.7H0.7V2.8H0.6zM0.8,2.7H0.9V2.8H0.8zM1,2.7H1.1V2.8H1zM1.1,2.7H1.2V2.8H1.1zM1.3,2.7H1.4V2.8H1.3zM1.9,2.7H2V2.8H1.9zM2,2.7H2.1V2.8H2zM2.1,2.7H2.2V2.8H2.1zM2.4,2.7H2.5V2.8H2.4zM2.6,2.7H2.7V2.8H2.6zM2.7,2.7H2.8V2.8H2.7zM2.8,2.7H2.9V2.8H2.8zM2.9,2.7H3V2.8H2.9zM0.2,2.8H0.3V2.9H0.2zM0.4,2.8H0.5V2.9H0.4zM0.5,2.8H0.6V2.9H0.5zM0.6,2.8H0.7V2.9H0.6zM0.8,2.8H0.9V2.9H0.8zM1.1,2.8H1.2V2.9H1.1zM1.3,2.8H1.4V2.9H1.3zM1.5,2.8H1.6V2.9H1.5zM1.6,2.8H1.7V2.9H1.6zM2.1,2.8H2.2V2.9H2.1zM2.6,2.8H2.7V2.9H2.6zM2.7,2.8H2.8V2.9H2.7zM2.8,2.8H2.9V2.9H2.8zM3,2.8H3.1V2.9H3zM0.2,2.9H0.3V3H0.2zM0.8,2.9H0.9V3H0.8zM1.3,2.9H1.4V3H1.3zM1.5,2.9H1.6V3H1.5zM1.7,2.9H1.8V3H1.7zM1.8,2.9H1.9V3H1.8zM1.9,2.9H2V3H1.9zM2,2.9H2.1V3H2zM2.1,2.9H2.2V3H2.1zM2.2,2.9H2.3V3H2.2zM2.3,2.9H2.4V3H2.3zM2.4,2.9H2.5V3H2.4zM2.6,2.9H2.7V3H2.6zM2.9,2.9H3V3H2.9zM0.2,3H0.3V3.1H0.2zM0.3,3H0.4V3.1H0.3zM0.4,3H0.5V3.1H0.4zM0.5,3H0.6V3.1H0.5zM0.6,3H0.7V3.1H0.6zM0.7,3H0.8V3.1H0.7zM0.8,3H0.9V3.1H0.8zM1,3H1.1V3.1H1zM1.1,3H1.2V3.1H1.1zM1.4,3H1.5V3.1H1.4zM1.6,3H1.7V3.1H1.6zM1.9,3H2V3.1H1.9zM2.2,3H2.3V3.1H2.2zM2.3,3H2.4V3.1H2.3zM2.4,3H2.5V3.1H2.4zM2.5,3H2.6V3.1H2.5zM2.6,3H2.7V3.1H2.6zM2.9,3H3V3.1H2.9z"/>
+                </svg>
+              </a>
+              <p class="linkedin-label">Scan for LinkedIn<br><span class="mono">linkedin.com/in/webmaxru</span></p>
+            </div>
+            <div class="resources">
+              <h3>Continue here</h3>
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.linkedin.com/in/webmaxru/">linkedin.com/in/webmaxru</a>
+                <a class="resource-link" href="https://github.com/microsoft/apm">github.com/microsoft/apm</a>
+                <a class="resource-link" href="https://microsoft.github.io/apm/">microsoft.github.io/apm</a>
+                <a class="resource-link" href="https://apm.isainative.dev/">apm.isainative.dev</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <aside class="notes-source">
         <span class="time">24:30-30:00</span>
-        <h3>Close in one minute; leave this up for questions</h3>
-        <p>The skill is a reviewed source, declared dependency, immutable resolution, hashed deployment, and required policy check.</p>
-        <p>Final line: Agent context becomes a real dependency when it has an owner, a version, a hash, and a gate.</p>
+        <h3>Close, then questions</h3>
+        <p>Agent context becomes a dependency when it has an owner, a version, a hash, and a gate. Leave this slide visible.</p>
       </aside>
     </section>
   </main>
 
-  <footer class="hud">
-    <span>Build a Supply Chain for Agent Context</span>
+  <footer class="hud" aria-label="Presentation controls">
     <span class="progress" aria-hidden="true"></span>
-    <span><b id="current">1</b> / <span id="total">4</span></span>
+    <span><b id="current">1</b> / <span id="total">5</span></span>
     <button id="notesButton" type="button" title="Toggle speaker notes (N)">notes [N]</button>
     <button id="themeButton" type="button" title="Toggle theme (T)">theme [T]</button>
     <button id="fullscreenButton" type="button" title="Toggle fullscreen (F)">full [F]</button>
@@ -692,8 +965,9 @@
 
       function render() {
         slides.forEach((slide, slideIndex) => {
-          slide.classList.toggle("active", slideIndex === index);
-          slide.setAttribute("aria-hidden", String(slideIndex !== index));
+          const active = slideIndex === index;
+          slide.classList.toggle("active", active);
+          slide.setAttribute("aria-hidden", String(!active));
         });
         [...progress.children].forEach((bar, barIndex) => {
           bar.classList.toggle("done", barIndex <= index);
@@ -701,7 +975,9 @@
         current.textContent = String(index + 1);
         document.title = `${slides[index].dataset.title} - Build a Supply Chain for Agent Context`;
         notesPanel.innerHTML = slides[index].querySelector(".notes-source").innerHTML;
-        history.replaceState(null, "", `?slide=${index + 1}`);
+        const next = new URL(window.location.href);
+        next.searchParams.set("slide", String(index + 1));
+        history.replaceState(null, "", next);
       }
 
       function move(delta) {
@@ -710,8 +986,14 @@
       }
 
       function toggleTheme() {
-        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-        document.documentElement.dataset.theme = next;
+        document.documentElement.dataset.theme =
+          document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      }
+
+      function toggleFullscreen() {
+        document.fullscreenElement
+          ? document.exitFullscreen()
+          : document.documentElement.requestFullscreen();
       }
 
       document.addEventListener("keydown", (event) => {
@@ -732,15 +1014,15 @@
         } else if (event.key.toLowerCase() === "t") {
           toggleTheme();
         } else if (event.key.toLowerCase() === "f") {
-          document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+          toggleFullscreen();
         }
       });
 
-      document.getElementById("notesButton").addEventListener("click", () => notesPanel.classList.toggle("open"));
-      document.getElementById("themeButton").addEventListener("click", toggleTheme);
-      document.getElementById("fullscreenButton").addEventListener("click", () => {
-        document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+      document.getElementById("notesButton").addEventListener("click", () => {
+        notesPanel.classList.toggle("open");
       });
+      document.getElementById("themeButton").addEventListener("click", toggleTheme);
+      document.getElementById("fullscreenButton").addEventListener("click", toggleFullscreen);
 
       render();
     })();

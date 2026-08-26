@@ -1,0 +1,20 @@
+CAPTURED DRY RUN - APM 0.28.0
+
+> apm install
+
+Targets: claude, copilot, cursor  (source: apm.yml)
+
+Resolved from webmaxru/ai-native-dev:
+- agent-package-manager#v1.9.0 -> d04f0b01
+- ard-registry-builder#v1.9.0 -> d04f0b01
+- version-bump-and-deploy.prompt.md#v1.9.0 -> d04f0b01
+- github-agentic-workflows#d04f0b01... -> d04f0b01
+- agent-skill-deploy#d04f0b01... -> d04f0b01
+
+Deployed:
+- 4 skills -> .agents/skills/, .claude/skills/
+- 1 prompt -> .github/prompts/
+- 2 command adapters -> .claude/commands/, .cursor/commands/
+
+[*] Installed 5 APM dependencies in 11.6s.
+Exit code: 0

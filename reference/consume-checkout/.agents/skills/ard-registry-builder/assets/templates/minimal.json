@@ -1,0 +1,20 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Acme Dev Tools"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:acme.com:weather:telemetry",
+      "displayName": "Acme Weather Telemetry Server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://api.acme.com/mcp/weather.json",
+      "description": "Live weather telemetry MCP server.",
+      "capabilities": ["WeatherTool", "ForecastTool"],
+      "representativeQueries": [
+        "what is the current wind speed in Chicago",
+        "get the 5-day forecast for Seattle"
+      ]
+    }
+  ]
+}

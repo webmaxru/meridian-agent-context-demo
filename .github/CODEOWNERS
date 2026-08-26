@@ -1,8 +1,6 @@
 * @webmaxru
 
-# Approved agent context is platform-owned and review-gated.
-/registry/skills/ @webmaxru
-
 # The enforcement path is reviewed separately from application code.
 /.github/workflows/ @webmaxru
-/reference/meridian-checkout/apm-policy.yml @webmaxru
+/demo/snippets/apm-policy.yml @webmaxru
+/reference/governed-checkout/apm-policy.yml @webmaxru

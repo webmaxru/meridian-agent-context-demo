@@ -1,0 +1,82 @@
+lockfile_version: '1'
+generated_at: '2026-08-25T14:57:37.503010+00:00'
+apm_version: 0.28.0
+dependencies:
+- repo_url: webmaxru/ai-native-dev
+  name: agent-package-manager
+  host: github.com
+  resolved_commit: d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  resolved_ref: v1.9.0
+  version: unknown
+  virtual_path: skills/agent-package-manager
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/agent-package-manager
+  - .agents/skills/agent-package-manager/SKILL.md
+  - .agents/skills/agent-package-manager/assets/apm.yml.template
+  - .agents/skills/agent-package-manager/references/command-workflows.md
+  - .agents/skills/agent-package-manager/references/manifest-and-lockfile.md
+  - .agents/skills/agent-package-manager/references/troubleshooting.md
+  deployed_file_hashes:
+    .agents/skills/agent-package-manager/SKILL.md: sha256:e105604e35ba3c91e163074435a0b707867e2787dab6c8f2c9b32c32c0239af5
+    .agents/skills/agent-package-manager/assets/apm.yml.template: sha256:bdb996550d9bb66228d642ab7d8acc30f671605a911f8360356c8816cec96b8c
+    .agents/skills/agent-package-manager/references/command-workflows.md: sha256:1786ff6e657c5c163313b3f5e4367209c44eb3e4a601245e38169e88364c256d
+    .agents/skills/agent-package-manager/references/manifest-and-lockfile.md: sha256:751ba3102a04626d96cdfd0400308704e344fc7d30f9817aefc1308e0be986c8
+    .agents/skills/agent-package-manager/references/troubleshooting.md: sha256:f57abc15c6c6bca5cf6f3fee02690aa68f2859fa4c58e5c8241c4e33b35e8f5f
+  content_hash: sha256:128fba8072e2e12db5e911d0f37d9676ffbf5e7e09607e65b139be7338ce6ff3
+deployments:
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:e105604e35ba3c91e163074435a0b707867e2787dab6c8f2c9b32c32c0239af5
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager/assets/apm.yml.template
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:bdb996550d9bb66228d642ab7d8acc30f671605a911f8360356c8816cec96b8c
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager/references/command-workflows.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:1786ff6e657c5c163313b3f5e4367209c44eb3e4a601245e38169e88364c256d
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager/references/manifest-and-lockfile.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:751ba3102a04626d96cdfd0400308704e344fc7d30f9817aefc1308e0be986c8
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager/references/troubleshooting.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:f57abc15c6c6bca5cf6f3fee02690aa68f2859fa4c58e5c8241c4e33b35e8f5f

@@ -1,0 +1,24 @@
+CAPTURED DRY RUN - APM 0.28.0
+
+Representative lock evidence:
+
+agent-package-manager
+  resolved_ref: v1.9.0
+  resolved_commit: d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  content_hash: sha256:128fba8072e2e12db5e911d0f37d9676ffbf5e7e09607e65b139be7338ce6ff3
+  deployed_file_hashes: 10
+
+version-bump-and-deploy.prompt.md
+  resolved_ref: v1.9.0
+  resolved_commit: d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  content_hash: sha256:b4ec59619cea5bf5f448b71142c25c7c4766e970d339652b226a1e00d48b3ca6
+  deployed_file_hashes: 3
+
+Frozen replay:
+  lock SHA-256 before: 575A76EEAFF620EAF3F9A2E031C85D24DCA265C04B06F99FD79C607A2AAFCFC4
+  lock SHA-256 after:  575A76EEAFF620EAF3F9A2E031C85D24DCA265C04B06F99FD79C607A2AAFCFC4
+  LOCK_UNCHANGED=True
+
+Audit:
+  No drift detected
+  All 10 checks passed

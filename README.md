@@ -1,36 +1,47 @@
 # Meridian Agent Context Supply Chain
 
-This public conference demo shows how Meridian, a fictional fintech team, turns reviewed AI-agent
-skills into pinned, hash-verified dependencies with [Agent Package Manager
-(APM)](https://microsoft.github.io/apm/).
+This public consumer/demo repository shows how Meridian, a fictional fintech team, consumes public
+agent context and governs company-owned context with [Agent Package Manager
+(APM)](https://microsoft.github.io/apm/). The company catalog lives separately in the private
+`webmaxru/meridian-agent-context-registry` repository.
 
-The repository contains two deliberately separate trust zones:
+The 30-minute story has two parts:
 
-- `registry/` is the reviewed source catalog owned by Meridian Platform Engineering.
-- `demo/` and `.demo-live/` are the consumer-side walkthrough for `meridian-checkout`.
+1. **Consuming APM** - install one public skill, declare a shared set of skills and a prompt in
+   `apm.yml`, then make the resolved commits and hashes visible in `apm.lock.yaml`.
+2. **Governing APM** - install a reviewed skill from Meridian's private registry, allow only that
+   source in policy, and require the same audit before a pull request can merge.
 
-The live session follows one skill from quarantine to a trusted release, then into an APM manifest,
-lockfile, multi-harness deployment, policy check, and required CI gate.
+The demo uses deliberately separate trust zones:
 
-> This repository is intentionally public so the live install needs no token. In a real company,
-> the same pattern works with a private Git host and read-only CI credentials.
+- `webmaxru/meridian-agent-context-registry` is the reviewed, private source catalog.
+- `demo/` contains clean starts, copy-ready snippets, captured output, and recovery material.
+- `reference/` contains the verified end states used by preflight, CI, and stage checkpoints.
+- `.demo-live/` is the ignored workspace recreated for each rehearsal.
 
-## Released catalog
+## Private catalog release
 
 The `v1.0.0` tag contains Meridian's first approved skill:
 
 ```text
-webmaxru/meridian-agent-context-demo/registry/skills/secure-payment-review#v1.0.0
+webmaxru/meridian-agent-context-registry/skills/secure-payment-review#v1.0.0
 ```
 
 ## Run the demo
 
-The exact 30-minute script, commands, expected outputs, timing cutoffs, and recovery checkpoints are
-in [`DEMO-RUNBOOK.md`](DEMO-RUNBOOK.md).
+The exact commands, timing cutoffs, and recovery checkpoints are in
+[`DEMO-RUNBOOK.md`](DEMO-RUNBOOK.md). The near-verbatim narration is in
+[`TALK-TRACK.md`](TALK-TRACK.md).
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\preflight.ps1
+& .\scripts\preflight.ps1
 ```
 
-The preflight verifies APM 0.28.0, warms the public release, runs the 31-check audit, and resets the
-ignored `.demo-live` workspace.
+The preflight obtains a session-only GitHub credential without printing it, verifies APM 0.28.0,
+warms both reference states, runs the consume and governed audits, and resets `.demo-live`. Hosted
+CI reads the same private source through the encrypted `MERIDIAN_REGISTRY_PAT` secret in the
+review-protected `meridian-registry` environment.
+
+This conference setup intentionally audits pull requests from trusted branches in this repository.
+GitHub does not expose private-registry secrets to fork workflows, so fork pull requests remain
+blocked until a maintainer recreates the reviewed change on a repository branch.
