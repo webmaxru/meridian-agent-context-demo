@@ -1,0 +1,860 @@
+lockfile_version: '1'
+generated_at: '2026-08-25T14:57:52.577571+00:00'
+apm_version: 0.28.0
+dependencies:
+- repo_url: webmaxru/ai-native-dev
+  name: ai-native-dev-version-bump-and-deploy
+  host: github.com
+  resolved_commit: d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  resolved_ref: v1.9.0
+  version: 1.0.0
+  virtual_path: prompts/version-bump-and-deploy.prompt.md
+  is_virtual: true
+  package_type: apm_package
+  deployed_files:
+  - .claude/commands/version-bump-and-deploy.md
+  - .cursor/commands/version-bump-and-deploy.md
+  - .github/prompts/version-bump-and-deploy.prompt.md
+  deployed_file_hashes:
+    .claude/commands/version-bump-and-deploy.md: sha256:c0edf7cc29cf0690ee9cdac9cb97699d37136d35ec738a54948f7790247febce
+    .cursor/commands/version-bump-and-deploy.md: sha256:c0edf7cc29cf0690ee9cdac9cb97699d37136d35ec738a54948f7790247febce
+    .github/prompts/version-bump-and-deploy.prompt.md: sha256:f21ba5bf92231e29b1c3bfce8aa349f5f1f11989c4c3a603562c812c5fd4558a
+  content_hash: sha256:b4ec59619cea5bf5f448b71142c25c7c4766e970d339652b226a1e00d48b3ca6
+- repo_url: webmaxru/ai-native-dev
+  name: agent-package-manager
+  host: github.com
+  resolved_commit: d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  resolved_ref: v1.9.0
+  version: unknown
+  virtual_path: skills/agent-package-manager
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/agent-package-manager
+  - .agents/skills/agent-package-manager/SKILL.md
+  - .agents/skills/agent-package-manager/assets/apm.yml.template
+  - .agents/skills/agent-package-manager/references/command-workflows.md
+  - .agents/skills/agent-package-manager/references/manifest-and-lockfile.md
+  - .agents/skills/agent-package-manager/references/troubleshooting.md
+  - .claude/skills/agent-package-manager
+  - .claude/skills/agent-package-manager/SKILL.md
+  - .claude/skills/agent-package-manager/assets/apm.yml.template
+  - .claude/skills/agent-package-manager/references/command-workflows.md
+  - .claude/skills/agent-package-manager/references/manifest-and-lockfile.md
+  - .claude/skills/agent-package-manager/references/troubleshooting.md
+  deployed_file_hashes:
+    .agents/skills/agent-package-manager/SKILL.md: sha256:e105604e35ba3c91e163074435a0b707867e2787dab6c8f2c9b32c32c0239af5
+    .agents/skills/agent-package-manager/assets/apm.yml.template: sha256:bdb996550d9bb66228d642ab7d8acc30f671605a911f8360356c8816cec96b8c
+    .agents/skills/agent-package-manager/references/command-workflows.md: sha256:1786ff6e657c5c163313b3f5e4367209c44eb3e4a601245e38169e88364c256d
+    .agents/skills/agent-package-manager/references/manifest-and-lockfile.md: sha256:751ba3102a04626d96cdfd0400308704e344fc7d30f9817aefc1308e0be986c8
+    .agents/skills/agent-package-manager/references/troubleshooting.md: sha256:f57abc15c6c6bca5cf6f3fee02690aa68f2859fa4c58e5c8241c4e33b35e8f5f
+    .claude/skills/agent-package-manager/SKILL.md: sha256:e105604e35ba3c91e163074435a0b707867e2787dab6c8f2c9b32c32c0239af5
+    .claude/skills/agent-package-manager/assets/apm.yml.template: sha256:bdb996550d9bb66228d642ab7d8acc30f671605a911f8360356c8816cec96b8c
+    .claude/skills/agent-package-manager/references/command-workflows.md: sha256:1786ff6e657c5c163313b3f5e4367209c44eb3e4a601245e38169e88364c256d
+    .claude/skills/agent-package-manager/references/manifest-and-lockfile.md: sha256:751ba3102a04626d96cdfd0400308704e344fc7d30f9817aefc1308e0be986c8
+    .claude/skills/agent-package-manager/references/troubleshooting.md: sha256:f57abc15c6c6bca5cf6f3fee02690aa68f2859fa4c58e5c8241c4e33b35e8f5f
+  content_hash: sha256:128fba8072e2e12db5e911d0f37d9676ffbf5e7e09607e65b139be7338ce6ff3
+- repo_url: webmaxru/ai-native-dev
+  name: agent-skill-deploy
+  host: github.com
+  resolved_commit: d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  resolved_ref: d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  version: unknown
+  virtual_path: skills/agent-skill-deploy
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/agent-skill-deploy
+  - .agents/skills/agent-skill-deploy/SKILL.md
+  - .agents/skills/agent-skill-deploy/references/surfaces.md
+  - .agents/skills/agent-skill-deploy/scripts/deploy-analyze.mjs
+  - .agents/skills/agent-skill-deploy/scripts/deploy-execute.mjs
+  - .agents/skills/agent-skill-deploy/scripts/deploy-preflight.mjs
+  - .claude/skills/agent-skill-deploy
+  - .claude/skills/agent-skill-deploy/SKILL.md
+  - .claude/skills/agent-skill-deploy/references/surfaces.md
+  - .claude/skills/agent-skill-deploy/scripts/deploy-analyze.mjs
+  - .claude/skills/agent-skill-deploy/scripts/deploy-execute.mjs
+  - .claude/skills/agent-skill-deploy/scripts/deploy-preflight.mjs
+  deployed_file_hashes:
+    .agents/skills/agent-skill-deploy/SKILL.md: sha256:c4466e8fee9177ed63fb2150d9c031f67376e37eb4c0b30df9005a1408353189
+    .agents/skills/agent-skill-deploy/references/surfaces.md: sha256:d4ecefb9393beabe676dbf4f611a8afc7c10f0dd9cadee881c00d6c56eea4675
+    .agents/skills/agent-skill-deploy/scripts/deploy-analyze.mjs: sha256:88d551c2f879f2e4c72b720f998d908e5d3e56e0d63c55716554a86a1ee0521a
+    .agents/skills/agent-skill-deploy/scripts/deploy-execute.mjs: sha256:75dfa2f815e277904f2995523508ba57cd244a5f29a6ac143f11b2ddb01d8bff
+    .agents/skills/agent-skill-deploy/scripts/deploy-preflight.mjs: sha256:a7fa3badd63e2ffd86d74f439f5709f2f8709914f38e8f78198a703869252834
+    .claude/skills/agent-skill-deploy/SKILL.md: sha256:c4466e8fee9177ed63fb2150d9c031f67376e37eb4c0b30df9005a1408353189
+    .claude/skills/agent-skill-deploy/references/surfaces.md: sha256:d4ecefb9393beabe676dbf4f611a8afc7c10f0dd9cadee881c00d6c56eea4675
+    .claude/skills/agent-skill-deploy/scripts/deploy-analyze.mjs: sha256:88d551c2f879f2e4c72b720f998d908e5d3e56e0d63c55716554a86a1ee0521a
+    .claude/skills/agent-skill-deploy/scripts/deploy-execute.mjs: sha256:75dfa2f815e277904f2995523508ba57cd244a5f29a6ac143f11b2ddb01d8bff
+    .claude/skills/agent-skill-deploy/scripts/deploy-preflight.mjs: sha256:a7fa3badd63e2ffd86d74f439f5709f2f8709914f38e8f78198a703869252834
+  content_hash: sha256:259c6df42c8e886c48f3e4a3593d185fbeb184b788da625351981a91b895d6be
+- repo_url: webmaxru/ai-native-dev
+  name: ard-registry-builder
+  host: github.com
+  resolved_commit: d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  resolved_ref: v1.9.0
+  version: unknown
+  virtual_path: skills/ard-registry-builder
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/ard-registry-builder
+  - .agents/skills/ard-registry-builder/SKILL.md
+  - .agents/skills/ard-registry-builder/assets/ai-catalog.schema.json
+  - .agents/skills/ard-registry-builder/assets/templates/enterprise.json
+  - .agents/skills/ard-registry-builder/assets/templates/local-dev.json
+  - .agents/skills/ard-registry-builder/assets/templates/minimal.json
+  - .agents/skills/ard-registry-builder/evals/evals.json
+  - .agents/skills/ard-registry-builder/evals/files/broken-catalog.json
+  - .agents/skills/ard-registry-builder/references/data-model.md
+  - .agents/skills/ard-registry-builder/references/publishing.md
+  - .agents/skills/ard-registry-builder/references/registry-api.md
+  - .agents/skills/ard-registry-builder/references/validation-rules.md
+  - .agents/skills/ard-registry-builder/scripts/new_catalog.py
+  - .agents/skills/ard-registry-builder/scripts/test_registry.py
+  - .agents/skills/ard-registry-builder/scripts/validate_catalog.py
+  - .claude/skills/ard-registry-builder
+  - .claude/skills/ard-registry-builder/SKILL.md
+  - .claude/skills/ard-registry-builder/assets/ai-catalog.schema.json
+  - .claude/skills/ard-registry-builder/assets/templates/enterprise.json
+  - .claude/skills/ard-registry-builder/assets/templates/local-dev.json
+  - .claude/skills/ard-registry-builder/assets/templates/minimal.json
+  - .claude/skills/ard-registry-builder/evals/evals.json
+  - .claude/skills/ard-registry-builder/evals/files/broken-catalog.json
+  - .claude/skills/ard-registry-builder/references/data-model.md
+  - .claude/skills/ard-registry-builder/references/publishing.md
+  - .claude/skills/ard-registry-builder/references/registry-api.md
+  - .claude/skills/ard-registry-builder/references/validation-rules.md
+  - .claude/skills/ard-registry-builder/scripts/new_catalog.py
+  - .claude/skills/ard-registry-builder/scripts/test_registry.py
+  - .claude/skills/ard-registry-builder/scripts/validate_catalog.py
+  deployed_file_hashes:
+    .agents/skills/ard-registry-builder/SKILL.md: sha256:279373fbec9cd7575fbf80ee09e5ba1e18703953e1229f96bc184f9f05765449
+    .agents/skills/ard-registry-builder/assets/ai-catalog.schema.json: sha256:c55238483a4738e08b250bdd6af1f4dc05a91afe882c649d224d09c19cd8fe09
+    .agents/skills/ard-registry-builder/assets/templates/enterprise.json: sha256:1e3a6c1a0c58495f0280ada311484a5a73e1a5f50909e70dd375ce65b7345447
+    .agents/skills/ard-registry-builder/assets/templates/local-dev.json: sha256:b1123454b7eef1a69e6b902e5e1857f058a368bc2ed309615468db5afdf138b0
+    .agents/skills/ard-registry-builder/assets/templates/minimal.json: sha256:80e54002df5c7a4fddc76adfdabf8d75d4c302d5edec6bb5e1ff8c56498da60b
+    .agents/skills/ard-registry-builder/evals/evals.json: sha256:080891a9d546d3a2e10bce4b5f3a707947e3b6e61607c5783eadaa128c6d7849
+    .agents/skills/ard-registry-builder/evals/files/broken-catalog.json: sha256:1c16c317ce8f1cfba707b3ee495a56908b5b4eda698131ee855a45b49df5f8ad
+    .agents/skills/ard-registry-builder/references/data-model.md: sha256:c19aa6f67f31c3cb20ef9d60a3df5f166cb143e0ff62ed1b71feaf2e5c551126
+    .agents/skills/ard-registry-builder/references/publishing.md: sha256:a3b390ec3623080f7c46894670c6140b0de3394e837fcf45d3cee2183c209474
+    .agents/skills/ard-registry-builder/references/registry-api.md: sha256:89e25fc85a04bb6ce180caaed054435e4612bfbfda673ae7305a622186372a61
+    .agents/skills/ard-registry-builder/references/validation-rules.md: sha256:52c87e1fffd664a9f67ac1ef81f20e4882dad52e5eee5026e1b4d74bdfcec009
+    .agents/skills/ard-registry-builder/scripts/new_catalog.py: sha256:cc115b8e430eae8b07e5ee59980fd3c8fd2f136d78abd2c8d44aba1f9d90fec1
+    .agents/skills/ard-registry-builder/scripts/test_registry.py: sha256:67f8e77d76866bc2a9b57553d762f889d47b0bd84078950c883b809b0064f923
+    .agents/skills/ard-registry-builder/scripts/validate_catalog.py: sha256:5b824902a5ac36aac48c7be42cfbb50475b6732bb47938f164a1bded48b36c3f
+    .claude/skills/ard-registry-builder/SKILL.md: sha256:279373fbec9cd7575fbf80ee09e5ba1e18703953e1229f96bc184f9f05765449
+    .claude/skills/ard-registry-builder/assets/ai-catalog.schema.json: sha256:c55238483a4738e08b250bdd6af1f4dc05a91afe882c649d224d09c19cd8fe09
+    .claude/skills/ard-registry-builder/assets/templates/enterprise.json: sha256:1e3a6c1a0c58495f0280ada311484a5a73e1a5f50909e70dd375ce65b7345447
+    .claude/skills/ard-registry-builder/assets/templates/local-dev.json: sha256:b1123454b7eef1a69e6b902e5e1857f058a368bc2ed309615468db5afdf138b0
+    .claude/skills/ard-registry-builder/assets/templates/minimal.json: sha256:80e54002df5c7a4fddc76adfdabf8d75d4c302d5edec6bb5e1ff8c56498da60b
+    .claude/skills/ard-registry-builder/evals/evals.json: sha256:080891a9d546d3a2e10bce4b5f3a707947e3b6e61607c5783eadaa128c6d7849
+    .claude/skills/ard-registry-builder/evals/files/broken-catalog.json: sha256:1c16c317ce8f1cfba707b3ee495a56908b5b4eda698131ee855a45b49df5f8ad
+    .claude/skills/ard-registry-builder/references/data-model.md: sha256:c19aa6f67f31c3cb20ef9d60a3df5f166cb143e0ff62ed1b71feaf2e5c551126
+    .claude/skills/ard-registry-builder/references/publishing.md: sha256:a3b390ec3623080f7c46894670c6140b0de3394e837fcf45d3cee2183c209474
+    .claude/skills/ard-registry-builder/references/registry-api.md: sha256:89e25fc85a04bb6ce180caaed054435e4612bfbfda673ae7305a622186372a61
+    .claude/skills/ard-registry-builder/references/validation-rules.md: sha256:52c87e1fffd664a9f67ac1ef81f20e4882dad52e5eee5026e1b4d74bdfcec009
+    .claude/skills/ard-registry-builder/scripts/new_catalog.py: sha256:cc115b8e430eae8b07e5ee59980fd3c8fd2f136d78abd2c8d44aba1f9d90fec1
+    .claude/skills/ard-registry-builder/scripts/test_registry.py: sha256:67f8e77d76866bc2a9b57553d762f889d47b0bd84078950c883b809b0064f923
+    .claude/skills/ard-registry-builder/scripts/validate_catalog.py: sha256:5b824902a5ac36aac48c7be42cfbb50475b6732bb47938f164a1bded48b36c3f
+  content_hash: sha256:fbda301151e4db89fa9fa10310d801003d52a3b86bfb7e2bd30e227b6e70857a
+- repo_url: webmaxru/ai-native-dev
+  name: github-agentic-workflows
+  host: github.com
+  resolved_commit: d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  resolved_ref: d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  version: unknown
+  virtual_path: skills/github-agentic-workflows
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/github-agentic-workflows
+  - .agents/skills/github-agentic-workflows/SKILL.md
+  - .agents/skills/github-agentic-workflows/assets/workflow.template.md
+  - .agents/skills/github-agentic-workflows/references/authoring.md
+  - .agents/skills/github-agentic-workflows/references/examples.md
+  - .agents/skills/github-agentic-workflows/references/security-and-operations.md
+  - .agents/skills/github-agentic-workflows/references/troubleshooting.md
+  - .agents/skills/github-agentic-workflows/scripts/find-gh-aw-targets.mjs
+  - .claude/skills/github-agentic-workflows
+  - .claude/skills/github-agentic-workflows/SKILL.md
+  - .claude/skills/github-agentic-workflows/assets/workflow.template.md
+  - .claude/skills/github-agentic-workflows/references/authoring.md
+  - .claude/skills/github-agentic-workflows/references/examples.md
+  - .claude/skills/github-agentic-workflows/references/security-and-operations.md
+  - .claude/skills/github-agentic-workflows/references/troubleshooting.md
+  - .claude/skills/github-agentic-workflows/scripts/find-gh-aw-targets.mjs
+  deployed_file_hashes:
+    .agents/skills/github-agentic-workflows/SKILL.md: sha256:459970151098c7671bc422bd2b10f68c0d773954bf3e9532797e76dbf2f50cf6
+    .agents/skills/github-agentic-workflows/assets/workflow.template.md: sha256:0f32061c1090fa5b1b745688649468949697504559ed21b64054598cac9ed6f0
+    .agents/skills/github-agentic-workflows/references/authoring.md: sha256:49f90171039e9ba3b64a7816f83d727ead26746009424aab63d44e4d86bdc170
+    .agents/skills/github-agentic-workflows/references/examples.md: sha256:4a94f9918114d22f2748e94b7c23ad08821b7b543e7051f789ecfd7ed93221a6
+    .agents/skills/github-agentic-workflows/references/security-and-operations.md: sha256:cc1e30d21a16655417e5e7d11a0190dc3f3a1727903e44077b43c4038c88fd65
+    .agents/skills/github-agentic-workflows/references/troubleshooting.md: sha256:72b23b76f206c9fc9d907db5f818fd871c6c6691253bfc9ecb383d2ef3fac5f0
+    .agents/skills/github-agentic-workflows/scripts/find-gh-aw-targets.mjs: sha256:220639cd966c1f9f6072b7e03cd7f45926b59f9fa9c67ae07dac0940c5f0fa39
+    .claude/skills/github-agentic-workflows/SKILL.md: sha256:459970151098c7671bc422bd2b10f68c0d773954bf3e9532797e76dbf2f50cf6
+    .claude/skills/github-agentic-workflows/assets/workflow.template.md: sha256:0f32061c1090fa5b1b745688649468949697504559ed21b64054598cac9ed6f0
+    .claude/skills/github-agentic-workflows/references/authoring.md: sha256:49f90171039e9ba3b64a7816f83d727ead26746009424aab63d44e4d86bdc170
+    .claude/skills/github-agentic-workflows/references/examples.md: sha256:4a94f9918114d22f2748e94b7c23ad08821b7b543e7051f789ecfd7ed93221a6
+    .claude/skills/github-agentic-workflows/references/security-and-operations.md: sha256:cc1e30d21a16655417e5e7d11a0190dc3f3a1727903e44077b43c4038c88fd65
+    .claude/skills/github-agentic-workflows/references/troubleshooting.md: sha256:72b23b76f206c9fc9d907db5f818fd871c6c6691253bfc9ecb383d2ef3fac5f0
+    .claude/skills/github-agentic-workflows/scripts/find-gh-aw-targets.mjs: sha256:220639cd966c1f9f6072b7e03cd7f45926b59f9fa9c67ae07dac0940c5f0fa39
+  content_hash: sha256:d5ad7b9d0cbfb21c6ba4b125614d93c1b81be80498e6e5eda7ebaf205e857a45
+deployments:
+- kind: project-relative
+  target: claude
+  value: .claude/commands/version-bump-and-deploy.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/prompts/version-bump-and-deploy.prompt.md
+  active_owner: webmaxru/ai-native-dev/prompts/version-bump-and-deploy.prompt.md
+  content_hash: sha256:c0edf7cc29cf0690ee9cdac9cb97699d37136d35ec738a54948f7790247febce
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-package-manager
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-package-manager/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:e105604e35ba3c91e163074435a0b707867e2787dab6c8f2c9b32c32c0239af5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-package-manager/assets/apm.yml.template
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:bdb996550d9bb66228d642ab7d8acc30f671605a911f8360356c8816cec96b8c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-package-manager/references/command-workflows.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:1786ff6e657c5c163313b3f5e4367209c44eb3e4a601245e38169e88364c256d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-package-manager/references/manifest-and-lockfile.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:751ba3102a04626d96cdfd0400308704e344fc7d30f9817aefc1308e0be986c8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-package-manager/references/troubleshooting.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:f57abc15c6c6bca5cf6f3fee02690aa68f2859fa4c58e5c8241c4e33b35e8f5f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-skill-deploy
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-skill-deploy/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: sha256:c4466e8fee9177ed63fb2150d9c031f67376e37eb4c0b30df9005a1408353189
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-skill-deploy/references/surfaces.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: sha256:d4ecefb9393beabe676dbf4f611a8afc7c10f0dd9cadee881c00d6c56eea4675
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-skill-deploy/scripts/deploy-analyze.mjs
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: sha256:88d551c2f879f2e4c72b720f998d908e5d3e56e0d63c55716554a86a1ee0521a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-skill-deploy/scripts/deploy-execute.mjs
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: sha256:75dfa2f815e277904f2995523508ba57cd244a5f29a6ac143f11b2ddb01d8bff
+- kind: project-relative
+  target: claude
+  value: .claude/skills/agent-skill-deploy/scripts/deploy-preflight.mjs
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: sha256:a7fa3badd63e2ffd86d74f439f5709f2f8709914f38e8f78198a703869252834
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:279373fbec9cd7575fbf80ee09e5ba1e18703953e1229f96bc184f9f05765449
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/assets/ai-catalog.schema.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:c55238483a4738e08b250bdd6af1f4dc05a91afe882c649d224d09c19cd8fe09
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/assets/templates/enterprise.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:1e3a6c1a0c58495f0280ada311484a5a73e1a5f50909e70dd375ce65b7345447
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/assets/templates/local-dev.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:b1123454b7eef1a69e6b902e5e1857f058a368bc2ed309615468db5afdf138b0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/assets/templates/minimal.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:80e54002df5c7a4fddc76adfdabf8d75d4c302d5edec6bb5e1ff8c56498da60b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/evals/evals.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:080891a9d546d3a2e10bce4b5f3a707947e3b6e61607c5783eadaa128c6d7849
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/evals/files/broken-catalog.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:1c16c317ce8f1cfba707b3ee495a56908b5b4eda698131ee855a45b49df5f8ad
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/references/data-model.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:c19aa6f67f31c3cb20ef9d60a3df5f166cb143e0ff62ed1b71feaf2e5c551126
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/references/publishing.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:a3b390ec3623080f7c46894670c6140b0de3394e837fcf45d3cee2183c209474
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/references/registry-api.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:89e25fc85a04bb6ce180caaed054435e4612bfbfda673ae7305a622186372a61
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/references/validation-rules.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:52c87e1fffd664a9f67ac1ef81f20e4882dad52e5eee5026e1b4d74bdfcec009
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/scripts/new_catalog.py
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:cc115b8e430eae8b07e5ee59980fd3c8fd2f136d78abd2c8d44aba1f9d90fec1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/scripts/test_registry.py
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:67f8e77d76866bc2a9b57553d762f889d47b0bd84078950c883b809b0064f923
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ard-registry-builder/scripts/validate_catalog.py
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:5b824902a5ac36aac48c7be42cfbb50475b6732bb47938f164a1bded48b36c3f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-agentic-workflows
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-agentic-workflows/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:459970151098c7671bc422bd2b10f68c0d773954bf3e9532797e76dbf2f50cf6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-agentic-workflows/assets/workflow.template.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:0f32061c1090fa5b1b745688649468949697504559ed21b64054598cac9ed6f0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-agentic-workflows/references/authoring.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:49f90171039e9ba3b64a7816f83d727ead26746009424aab63d44e4d86bdc170
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-agentic-workflows/references/examples.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:4a94f9918114d22f2748e94b7c23ad08821b7b543e7051f789ecfd7ed93221a6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-agentic-workflows/references/security-and-operations.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:cc1e30d21a16655417e5e7d11a0190dc3f3a1727903e44077b43c4038c88fd65
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-agentic-workflows/references/troubleshooting.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:72b23b76f206c9fc9d907db5f818fd871c6c6691253bfc9ecb383d2ef3fac5f0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-agentic-workflows/scripts/find-gh-aw-targets.mjs
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:220639cd966c1f9f6072b7e03cd7f45926b59f9fa9c67ae07dac0940c5f0fa39
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:e105604e35ba3c91e163074435a0b707867e2787dab6c8f2c9b32c32c0239af5
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager/assets/apm.yml.template
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:bdb996550d9bb66228d642ab7d8acc30f671605a911f8360356c8816cec96b8c
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager/references/command-workflows.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:1786ff6e657c5c163313b3f5e4367209c44eb3e4a601245e38169e88364c256d
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager/references/manifest-and-lockfile.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:751ba3102a04626d96cdfd0400308704e344fc7d30f9817aefc1308e0be986c8
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-package-manager/references/troubleshooting.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-package-manager
+  active_owner: webmaxru/ai-native-dev/skills/agent-package-manager
+  content_hash: sha256:f57abc15c6c6bca5cf6f3fee02690aa68f2859fa4c58e5c8241c4e33b35e8f5f
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-skill-deploy
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-skill-deploy/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: sha256:c4466e8fee9177ed63fb2150d9c031f67376e37eb4c0b30df9005a1408353189
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-skill-deploy/references/surfaces.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: sha256:d4ecefb9393beabe676dbf4f611a8afc7c10f0dd9cadee881c00d6c56eea4675
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-skill-deploy/scripts/deploy-analyze.mjs
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: sha256:88d551c2f879f2e4c72b720f998d908e5d3e56e0d63c55716554a86a1ee0521a
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-skill-deploy/scripts/deploy-execute.mjs
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: sha256:75dfa2f815e277904f2995523508ba57cd244a5f29a6ac143f11b2ddb01d8bff
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/agent-skill-deploy/scripts/deploy-preflight.mjs
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/agent-skill-deploy
+  active_owner: webmaxru/ai-native-dev/skills/agent-skill-deploy
+  content_hash: sha256:a7fa3badd63e2ffd86d74f439f5709f2f8709914f38e8f78198a703869252834
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:279373fbec9cd7575fbf80ee09e5ba1e18703953e1229f96bc184f9f05765449
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/assets/ai-catalog.schema.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:c55238483a4738e08b250bdd6af1f4dc05a91afe882c649d224d09c19cd8fe09
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/assets/templates/enterprise.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:1e3a6c1a0c58495f0280ada311484a5a73e1a5f50909e70dd375ce65b7345447
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/assets/templates/local-dev.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:b1123454b7eef1a69e6b902e5e1857f058a368bc2ed309615468db5afdf138b0
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/assets/templates/minimal.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:80e54002df5c7a4fddc76adfdabf8d75d4c302d5edec6bb5e1ff8c56498da60b
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/evals/evals.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:080891a9d546d3a2e10bce4b5f3a707947e3b6e61607c5783eadaa128c6d7849
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/evals/files/broken-catalog.json
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:1c16c317ce8f1cfba707b3ee495a56908b5b4eda698131ee855a45b49df5f8ad
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/references/data-model.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:c19aa6f67f31c3cb20ef9d60a3df5f166cb143e0ff62ed1b71feaf2e5c551126
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/references/publishing.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:a3b390ec3623080f7c46894670c6140b0de3394e837fcf45d3cee2183c209474
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/references/registry-api.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:89e25fc85a04bb6ce180caaed054435e4612bfbfda673ae7305a622186372a61
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/references/validation-rules.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:52c87e1fffd664a9f67ac1ef81f20e4882dad52e5eee5026e1b4d74bdfcec009
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/scripts/new_catalog.py
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:cc115b8e430eae8b07e5ee59980fd3c8fd2f136d78abd2c8d44aba1f9d90fec1
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/scripts/test_registry.py
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:67f8e77d76866bc2a9b57553d762f889d47b0bd84078950c883b809b0064f923
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/ard-registry-builder/scripts/validate_catalog.py
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/ard-registry-builder
+  active_owner: webmaxru/ai-native-dev/skills/ard-registry-builder
+  content_hash: sha256:5b824902a5ac36aac48c7be42cfbb50475b6732bb47938f164a1bded48b36c3f
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/github-agentic-workflows
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/github-agentic-workflows/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:459970151098c7671bc422bd2b10f68c0d773954bf3e9532797e76dbf2f50cf6
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/github-agentic-workflows/assets/workflow.template.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:0f32061c1090fa5b1b745688649468949697504559ed21b64054598cac9ed6f0
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/github-agentic-workflows/references/authoring.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:49f90171039e9ba3b64a7816f83d727ead26746009424aab63d44e4d86bdc170
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/github-agentic-workflows/references/examples.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:4a94f9918114d22f2748e94b7c23ad08821b7b543e7051f789ecfd7ed93221a6
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/github-agentic-workflows/references/security-and-operations.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:cc1e30d21a16655417e5e7d11a0190dc3f3a1727903e44077b43c4038c88fd65
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/github-agentic-workflows/references/troubleshooting.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:72b23b76f206c9fc9d907db5f818fd871c6c6691253bfc9ecb383d2ef3fac5f0
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/github-agentic-workflows/scripts/find-gh-aw-targets.mjs
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/skills/github-agentic-workflows
+  active_owner: webmaxru/ai-native-dev/skills/github-agentic-workflows
+  content_hash: sha256:220639cd966c1f9f6072b7e03cd7f45926b59f9fa9c67ae07dac0940c5f0fa39
+- kind: project-relative
+  target: copilot
+  value: .github/prompts/version-bump-and-deploy.prompt.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/prompts/version-bump-and-deploy.prompt.md
+  active_owner: webmaxru/ai-native-dev/prompts/version-bump-and-deploy.prompt.md
+  content_hash: sha256:f21ba5bf92231e29b1c3bfce8aa349f5f1f11989c4c3a603562c812c5fd4558a
+- kind: project-relative
+  target: cursor
+  value: .cursor/commands/version-bump-and-deploy.md
+  runtime: null
+  scope: project
+  owners:
+  - webmaxru/ai-native-dev/prompts/version-bump-and-deploy.prompt.md
+  active_owner: webmaxru/ai-native-dev/prompts/version-bump-and-deploy.prompt.md
+  content_hash: sha256:c0edf7cc29cf0690ee9cdac9cb97699d37136d35ec738a54948f7790247febce

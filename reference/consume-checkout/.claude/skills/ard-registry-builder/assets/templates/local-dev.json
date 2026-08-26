@@ -1,0 +1,19 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Local Test Environment"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:agent.localhost:weather:telemetry",
+      "displayName": "Local Weather Node",
+      "type": "application/mcp-server-card+json",
+      "url": "http://localhost:8080/mcp",
+      "description": "Local test instance of the weather capability.",
+      "representativeQueries": [
+        "current temperature in my test city",
+        "local forecast smoke test"
+      ]
+    }
+  ]
+}

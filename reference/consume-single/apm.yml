@@ -1,0 +1,15 @@
+name: consume-single
+version: 1.0.0
+description: APM project for consume-single
+author: Maxim Salnikov
+# Which agent platforms to deploy to.
+# Resolution order: --target flag > this field > auto-detect from filesystem.
+# Accepted values: agent-skills, antigravity, claude, codex, copilot, cursor, gemini, grok-build, kiro, opencode, windsurf
+targets:
+  - copilot
+dependencies:
+  apm:
+    - webmaxru/ai-native-dev/skills/agent-package-manager#v1.9.0
+  mcp: []
+includes: auto
+scripts: {}

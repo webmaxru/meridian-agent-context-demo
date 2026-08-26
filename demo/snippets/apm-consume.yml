@@ -1,0 +1,26 @@
+# Consume a mixed-pin agent-context supply chain from one public repository.
+# Release tags are readable; full SHAs are immutable; the lockfile records the deployed bytes.
+name: meridian-checkout-public-context
+version: 1.0.0
+description: Shared public agent context for the Meridian checkout team.
+author: Meridian Checkout Team
+
+targets:
+  - claude
+  - copilot
+  - cursor
+
+dependencies:
+  apm:
+    # Human-readable release pins.
+    - webmaxru/ai-native-dev/skills/agent-package-manager#v1.9.0
+    - webmaxru/ai-native-dev/skills/ard-registry-builder#v1.9.0
+    - webmaxru/ai-native-dev/prompts/version-bump-and-deploy.prompt.md#v1.9.0
+
+    # Immutable pins to the commit behind v1.9.0.
+    - webmaxru/ai-native-dev/skills/github-agentic-workflows#d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+    - webmaxru/ai-native-dev/skills/agent-skill-deploy#d04f0b01d6d4f08230f297d4a0e636fd482b3a90
+  mcp: []
+
+includes: auto
+scripts: {}

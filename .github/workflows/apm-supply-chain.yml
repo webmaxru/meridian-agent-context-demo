@@ -14,9 +14,11 @@ jobs:
   audit:
     name: audit
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: meridian-registry
     defaults:
       run:
-        working-directory: reference/meridian-checkout
+        working-directory: reference/governed-checkout
 
     steps:
       - name: Check out the declared context
@@ -34,4 +36,7 @@ jobs:
         run: apm policy status --policy-source ./apm-policy.yml --check --no-cache
 
       - name: Audit source, lockfile, hashes, drift, and policy
+        env:
+          # APM reads this encrypted credential to resolve Meridian's separate private registry.
+          GITHUB_APM_PAT: ${{ secrets.MERIDIAN_REGISTRY_PAT }}
         run: apm audit --ci --policy ./apm-policy.yml --no-cache --no-fail-fast

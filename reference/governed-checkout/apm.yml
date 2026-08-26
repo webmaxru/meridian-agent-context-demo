@@ -1,0 +1,18 @@
+# Meridian starts with explicit harness targets and no approved company dependency.
+name: meridian-checkout-governed-context
+version: 1.0.0
+description: Company-reviewed agent context for the Meridian checkout service.
+author: Meridian Checkout Team
+
+targets:
+  - claude
+  - copilot
+  - cursor
+
+dependencies:
+  apm:
+    - webmaxru/meridian-agent-context-registry/skills/secure-payment-review#v1.0.0
+  mcp: []
+
+includes: auto
+scripts: {}

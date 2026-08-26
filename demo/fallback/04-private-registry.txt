@@ -1,0 +1,18 @@
+CAPTURED DRY RUN - APM 0.28.0
+
+Source repository:
+  webmaxru/meridian-agent-context-registry
+  visibility: PRIVATE
+
+> apm install 'webmaxru/meridian-agent-context-registry/skills/secure-payment-review#v1.0.0'
+
+[+] webmaxru/meridian-agent-context-registry/skills/secure-payment-review#v1.0.0
+    #v1.0.0 @5b105da7
+|-- Skill integrated -> .agents/skills/, .claude/skills/
+
+resolved_commit: 5b105da760849b41b94a16ca043754e5336f84b6
+content_hash: sha256:54bda74d0776581d8ca64b4849cf6f096070801dbf2e7557f663eac544274016
+deployed_file_hashes: 2
+
+[*] Installed 1 APM dependency in 23.1s.
+Exit code: 0

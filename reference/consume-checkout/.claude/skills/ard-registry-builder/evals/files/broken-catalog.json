@@ -1,0 +1,25 @@
+{
+  "specVersion": "1.0",
+  "host": { "displayName": "Partnerly" },
+  "entries": [
+    {
+      "identifier": "urn:ai:partnerly.io:support:assistant",
+      "displayName": "Support Assistant",
+      "type": "application/a2a-agent-card+json",
+      "url": "https://api.partnerly.io/agents/support.json",
+      "data": { "name": "Support Assistant" }
+    },
+    {
+      "identifier": "urn:air:partnerly.io:billing:reconciler",
+      "displayName": "Billing Reconciler",
+      "type": "application/mcp-server-card+json",
+      "url": "https://api.partnerly.io/mcp/billing.json",
+      "trustManifest": {
+        "identity": "spiffe://partnerly.io/billing/reconciler",
+        "attestations": [
+          { "type": "SOC2-Type2", "uri": "https://trust.partnerly.io/soc2.pdf" }
+        ]
+      }
+    }
+  ]
+}

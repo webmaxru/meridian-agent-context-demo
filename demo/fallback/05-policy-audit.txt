@@ -1,0 +1,20 @@
+CAPTURED DRY RUN - APM 0.28.0
+
+> apm policy status --policy-source .\apm-policy.yml --check
+
+Outcome: found
+Source: file:apm-policy.yml
+Enforcement: block
+Effective rules: 2 dependency allow patterns
+Warnings: none
+
+> apm audit --ci --policy .\apm-policy.yml --no-fail-fast
+
+[+] Replayed 1 package
+[+] No drift detected
+[+] All dependencies match allow list
+[+] All dependencies use pinned constraints
+[+] No critical hidden Unicode or hash drift detected
+
+[*] All 31 checks passed
+Exit code: 0

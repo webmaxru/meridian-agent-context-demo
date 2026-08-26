@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
   [Parameter(Mandatory)]
-  [ValidateSet("installed", "governed")]
+  [ValidateSet("consume-single", "consume-manifest", "govern-private", "govern-policy")]
   [string]$Name
 )
 
@@ -9,9 +9,41 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
-$source = Join-Path $repoRoot "reference\meridian-checkout"
 $liveRoot = Join-Path $repoRoot ".demo-live"
-$destination = Join-Path $liveRoot "meridian-checkout"
+
+$checkpoint = switch ($Name) {
+  "consume-single" {
+    @{
+      Source = "reference\consume-single"
+      Destination = "consume-checkout"
+      RemovePolicy = $false
+    }
+  }
+  "consume-manifest" {
+    @{
+      Source = "reference\consume-checkout"
+      Destination = "consume-checkout"
+      RemovePolicy = $false
+    }
+  }
+  "govern-private" {
+    @{
+      Source = "reference\governed-checkout"
+      Destination = "governed-checkout"
+      RemovePolicy = $true
+    }
+  }
+  "govern-policy" {
+    @{
+      Source = "reference\governed-checkout"
+      Destination = "governed-checkout"
+      RemovePolicy = $false
+    }
+  }
+}
+
+$source = Join-Path $repoRoot $checkpoint.Source
+$destination = Join-Path $liveRoot $checkpoint.Destination
 
 if (-not (Test-Path -LiteralPath $source)) {
   throw "Reference checkpoint is missing: $source"
@@ -31,7 +63,7 @@ if (Test-Path -LiteralPath $destination) {
 
 Copy-Item -LiteralPath $source -Destination $destination -Recurse
 
-if ($Name -eq "installed") {
+if ($checkpoint.RemovePolicy) {
   Remove-Item -LiteralPath (Join-Path $destination "apm-policy.yml") -ErrorAction SilentlyContinue
 }
 

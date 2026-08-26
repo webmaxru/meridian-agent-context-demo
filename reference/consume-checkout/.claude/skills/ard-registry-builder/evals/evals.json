@@ -1,0 +1,69 @@
+{
+  "skill_name": "ard-registry-builder",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We're mycorp.io. I want to make our internal MCP weather server (at https://api.mycorp.io/mcp/weather.json) and our A2A travel agent discoverable through ARD. Create an ai-catalog.json I can host at our well-known path.",
+      "expected_output": "A valid ai-catalog.json with specVersion 1.0, a host block, and two entries using urn:air:mycorp.io:... identifiers, correct media types, exactly one of url/data each, and 2-5 representativeQueries. It must pass scripts/validate_catalog.py with 0 errors.",
+      "files": [],
+      "expectations": [
+        "Output is a JSON manifest with specVersion \"1.0\" and a non-empty entries array",
+        "Every identifier uses the urn:air: prefix anchored to mycorp.io",
+        "The weather entry uses an MCP media type and the travel entry uses an a2a-agent-card media type",
+        "Each entry has exactly one of url or data",
+        "At least one entry includes representativeQueries with 2 to 5 items",
+        "Running scripts/validate_catalog.py on the result reports 0 errors"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A partner says our ai-catalog.json won't get indexed by their discovery service. The file is attached. What's wrong with it and can you fix it?",
+      "expected_output": "Identifies the urn:ai: (should be urn:air:) on the first entry, the entry carrying BOTH url and data, and the SOC2 attestation missing the required mediaType. Produces a corrected manifest that passes validation.",
+      "files": ["evals/files/broken-catalog.json"],
+      "expectations": [
+        "Diagnosis explicitly mentions the urn:ai: vs urn:air: NID problem",
+        "Diagnosis flags that the first entry has both url and data (Strict Value-or-Reference)",
+        "Diagnosis flags the attestation missing the required mediaType field",
+        "The skill ran scripts/validate_catalog.py rather than only eyeballing the file",
+        "The corrected manifest passes scripts/validate_catalog.py with 0 errors"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We just deployed our ARD agent registry behind http://localhost:9019/api. Can you check whether its search endpoint is actually spec-compliant before we announce it?",
+      "expected_output": "Runs scripts/test_registry.py against the base URL and reports per-check results, distinguishing the required POST /search checks (status 200, results envelope, result shape with score+source, 400 on malformed request) from the optional /agents and /explore checks.",
+      "files": [],
+      "expectations": [
+        "The skill invokes scripts/test_registry.py against http://localhost:9019/api",
+        "The report distinguishes required /search checks from optional /agents and /explore checks",
+        "It explains that each search result must be a catalog entry carrying a score (0-100) and a source",
+        "It notes that a malformed request must be rejected with 400 plus errorCode and message"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Add SOC2 Type 2 and SPIFFE attestations to our urn:air:mycorp.io:finance:tax-agent entry and bump its version to 1.3.0.",
+      "expected_output": "Adds a trustManifest with identity aligned to mycorp.io, attestations each carrying type, uri, and mediaType, sets version to 1.3.0 and refreshes updatedAt. The entry still passes validation.",
+      "files": [],
+      "expectations": [
+        "A trustManifest is added with an identity whose domain aligns with mycorp.io",
+        "Each attestation includes type, uri, and mediaType",
+        "version is set to 1.3.0 and updatedAt is a valid ISO 8601 timestamp",
+        "The identifier URN is left unchanged",
+        "The updated entry passes scripts/validate_catalog.py with 0 errors"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Quick conceptual question for our team wiki: in an ARD entry, what's the difference between the urn:air identifier and the url, and why can't we just use localhost as the publisher in the URN?",
+      "expected_output": "Explains identity (stable URN) vs location (movable url/data), and why a bare localhost publisher breaks global uniqueness and DNS-anchored trust verification, recommending agent.localhost or example.com for local-only work.",
+      "files": [],
+      "expectations": [
+        "Explains that the URN is stable logical identity and the url/data is the movable physical location",
+        "States that the publisher segment must be a verifiable FQDN used as a trust anchor",
+        "Explains that bare localhost is not globally unique or verifiable and breaks federation/trust",
+        "Recommends a reserved placeholder such as agent.localhost or example.com for local-only development"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Acme Enterprise AI",
+    "identifier": "did:web:acme.com",
+    "documentationUrl": "https://acme.com/docs/agents",
+    "logoUrl": "https://acme.com/logo.png"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:acme.com:travel:concierge",
+      "displayName": "Travel Concierge",
+      "type": "application/a2a-agent-card+json",
+      "url": "https://api.acme.com/travel/concierge.json",
+      "description": "AI-powered travel planning agent.",
+      "tags": ["travel", "booking"],
+      "representativeQueries": [
+        "book me a flight to Tokyo next Friday",
+        "plan a 3-day itinerary in Lisbon"
+      ],
+      "version": "2.1.0",
+      "updatedAt": "2026-05-28T12:00:00Z",
+      "trustManifest": {
+        "identity": "spiffe://acme.com/travel/concierge",
+        "identityType": "spiffe",
+        "attestations": [
+          {
+            "type": "SPIFFE-X509",
+            "uri": "https://acme.com/.well-known/spiffe/jwks",
+            "mediaType": "application/json"
+          },
+          {
+            "type": "SOC2-Type2",
+            "uri": "https://trust.acme.com/reports/soc2.pdf",
+            "mediaType": "application/pdf",
+            "digest": "sha256:3a7bd3e2360a3d29eea436fcfb7e44c735d117c42d1c1835420b6b9942dd4f1b"
+          }
+        ],
+        "provenance": [
+          {
+            "relation": "publishedFrom",
+            "sourceId": "urn:air:acme.com:travel:concierge-staging"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "urn:air:acme.com:registry:global",
+      "displayName": "Acme Global Agent Registry",
+      "type": "application/ai-registry+json",
+      "url": "https://registry.acme.com/api/v1/",
+      "description": "Dynamic REST search interface for all approved enterprise agents.",
+      "tags": ["registry", "search", "dynamic"]
+    }
+  ]
+}

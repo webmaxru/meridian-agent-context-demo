@@ -3,420 +3,430 @@
 **30-minute, demo-first conference runbook**
 **Verified:** 2026-08-25 with Agent Package Manager CLI **0.28.0**
 
-This talk uses **Meridian**, the fictional fintech from *The Missing Package Manager*. Meridian's
-six-person `meridian-checkout` team uses GitHub Copilot, Claude Code, and Cursor. The narrow story
-for this session is:
+## Session description
 
-> The team wants useful agent skills, but copying an arbitrary `SKILL.md` from the internet gives
-> them no review, provenance, reproducibility, or policy. They create a reviewed catalog, pin one
-> approved skill in the service manifest, let APM resolve and hash it for every harness, and make the
-> same audit a required pull-request check.
+> Your software supply chain is signed, pinned, and scanned in continuous integration. Your AI
+> agents' context isn't. Spend a worthwhile 30 minutes with Maxim Salnikov as he builds a supply
+> chain for agent context with Agent Package Manager: sourcing approved packages from a trusted
+> registry, pinning and hash-verifying them on any harness, and enforcing organization policy with
+> an unbypassable CI gate.
 
-APM means **Agent Package Manager** in this talk, not application performance monitoring.
+In this talk, **unbypassable** is scoped to ordinary contributors. Repository administrators remain
+the ultimate trust boundary.
 
-## What the audience sees
+The running project is `meridian-checkout`, owned by Meridian, the fictional fintech from the book.
+Lena uses GitHub Copilot, Omar uses Claude Code, and Priya uses Cursor. They want useful agent
+skills, but they do not want trust, versioning, or installation to depend on copied files and wiki
+instructions.
+
+The live story has two parts:
+
+1. **Consuming APM** - install one public skill, declare a team context set in `apm.yml`, and prove
+   its exact resolution and native harness deployment.
+2. **Governing APM** - install a reviewed skill from Meridian's private registry, add a blocking
+   sourcing policy, and show the required pull-request gate.
+
+The setup uses two repositories because GitHub Free cannot protect branches in private
+repositories:
+
+| Trust zone | Repository | Visibility | Purpose |
+| --- | --- | --- | --- |
+| Consumer and gate | `webmaxru/meridian-agent-context-demo` | Public | Demo project, policy, CI, required `audit` status |
+| Company registry | `webmaxru/meridian-agent-context-registry` | Private | Reviewed Meridian skills and release `v1.0.0` |
+
+This separation is intentional: the source can be private while the consumer repository provides a
+real, inspectable branch-protection proof.
+
+## Thirty-minute map
 
 | Time | Surface | Outcome |
 | ---: | --- | --- |
-| 00:00-01:20 | Slide 1 | Hook: a text file is still a supply-chain input |
-| 01:20-04:30 | VS Code + terminal | Reject a downloaded skill; pass the reviewed one |
-| 04:30-05:30 | Slide 2 | Visualize quarantine -> review -> release -> install -> gate |
-| 05:30-10:30 | VS Code + terminal | Install one pinned skill for Copilot, Claude, and Cursor |
-| 10:30-14:30 | VS Code + terminal | Read tag, commit, package hash, and deployed-file hashes |
-| 14:30-18:30 | VS Code + terminal | Add the trusted-source policy and run the clean audit |
-| 18:30-19:30 | Slide 3 | Visualize why the CI control is authoritative |
-| 19:30-24:30 | VS Code + GitHub | Show the pinned workflow, CODEOWNERS, and required check |
-| 24:30-25:30 | Slide 4 | Close on owner + version + hash + gate |
-| 25:30-30:00 | Slide 4 | Questions and recovery buffer |
+| 00:00-01:20 | Slide 1 | Agent context is a supply-chain input |
+| 01:20-02:35 | Slide 2 | What APM manages and which controls it adds |
+| 02:35-03:15 | Slide 3 | Preview the consuming path |
+| 03:15-05:45 | VS Code + terminal | Install one released public skill |
+| 05:45-08:30 | VS Code + terminal | Install a multi-asset `apm.yml` |
+| 08:30-11:30 | VS Code + terminal | Show native paths, lock evidence, frozen replay, and audit |
+| 11:30-12:15 | Slide 4 | Preview the governing path |
+| 12:15-15:45 | VS Code + terminal | Install Meridian's private reviewed skill |
+| 15:45-19:30 | VS Code + terminal | Add blocking sourcing policy and run the 31-check audit |
+| 19:30-24:30 | VS Code + GitHub | Show pinned workflow, secret, CODEOWNERS, and required status |
+| 24:30-25:00 | Slide 5 | Close on owner, version, hash, and gate |
+| 25:00-30:00 | Slide 5 | Questions and recovery buffer |
 
-The schedule intentionally budgets about ten times more explanation time than command time.
+The critical-path APM commands took **79.740 seconds** in the full dry run. The remaining time is
+for explanation, file inspection, transitions, and audience questions.
 
 ## Before the session
 
-### 1. Prepare the repository
+### 1. Keep both repositories side by side
+
+Expected local paths:
+
+```text
+$HOME\Downloads\projects\meridian-agent-context-demo
+$HOME\Downloads\projects\meridian-agent-context-registry
+```
+
+Open the demo repository in VS Code. Open the private registry in a second window, or add it as a
+second workspace folder. Set the terminal font to at least 18 px.
+
+### 2. Run preflight in the terminal you will keep open
 
 ```powershell
 Set-Location "$HOME\Downloads\projects\meridian-agent-context-demo"
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\preflight.ps1
+& .\scripts\preflight.ps1
 ```
+
+Run the script with `&`, not through a separate `powershell -File` process. Preflight obtains the
+current `gh` credential and leaves `GITHUB_APM_PAT` in this terminal process without printing it.
+Keep this terminal open for the demo.
 
 Expected final lines:
 
 ```text
 Preflight PASS
 APM: Agent Package Manager (APM) CLI version 0.28.0
-Release: v1.0.0 is reachable
-Reference: install + 31-check audit passed
-Workspace: .demo-live reset to the opening state
+Public source: ai-native-dev v1.9.0 is reachable
+Private source: meridian-agent-context-registry v1.0.0 authenticated (credential not printed)
+Consume reference: frozen replay + audit passed
+Govern reference: frozen replay + policy audit passed
+Workspace: .demo-live reset to both opening states
 ```
 
-Measured preflight time: **14-33 seconds** across rehearsals. Run it before the session; it warms
-the package cache, proves the reference state, and recreates `.demo-live` without changing tracked
-files.
+Measured preflight time: **44.97 seconds**. It verifies both sources, warms the machine cache, tests
+the frozen and governed references, removes reference-local package caches, and resets `.demo-live`.
 
-### 2. Prepare the screens
+### 3. Pre-open the files
 
-Open the repository root in VS Code. Set terminal font to at least 18 px and keep the terminal at
-the repository root. Pre-open these files in this order:
+In the demo repository:
 
-1. `.demo-live/meridian-checkout/src/refund.ts`
-2. `.demo-live/quarantine/refund-helper/SKILL.md`
-3. `registry/skills/secure-payment-review/SKILL.md`
-4. `.demo-live/meridian-checkout/apm.yml`
-5. `demo/snippets/apm-policy.yml`
-6. `.github/workflows/apm-supply-chain.yml`
-7. `.github/CODEOWNERS`
+1. `.demo-live/consume-checkout/src/refund.ts`
+2. `demo/snippets/apm-consume.yml`
+3. `.demo-live/governed-checkout/apm.yml`
+4. `demo/snippets/apm-policy.yml`
+5. `.github/workflows/apm-supply-chain.yml`
+6. `.github/CODEOWNERS`
 
-Open the local slide deck separately:
+In the private registry:
+
+1. `skills/secure-payment-review/SKILL.md`
+2. `.github/CODEOWNERS`
+
+Open these authenticated browser tabs:
+
+- <https://github.com/webmaxru/meridian-agent-context-registry>
+- <https://github.com/webmaxru/meridian-agent-context-demo/actions/workflows/apm-supply-chain.yml>
+- <https://github.com/webmaxru/meridian-agent-context-demo/settings/branches>
+
+Open the deck:
 
 ```powershell
 Start-Process .\slides\index.html
 ```
 
-Press `F` once the deck opens. Fullscreen hides the small presenter-control strip from the
-projector; `N` still toggles speaker notes during rehearsal.
+Press `F` for fullscreen. `N` toggles concise speaker notes during rehearsal.
 
-For the deck in the book repository, use:
+## Live demo: Part 1 - Consuming APM
 
-```powershell
-Start-Process "$HOME\Downloads\projects\agent-package-manager-book\slides\index.html"
-```
+### 03:15-05:45 - Install one public skill
 
-Open these browser tabs behind the deck:
-
-- <https://github.com/webmaxru/meridian-agent-context-demo/releases/tag/v1.0.0>
-- <https://github.com/webmaxru/meridian-agent-context-demo/actions/workflows/apm-supply-chain.yml>
-- <https://github.com/webmaxru/meridian-agent-context-demo/settings/branches>
-
-Do not open a live Copilot chat during the critical path. Agent response latency is nondeterministic,
-and the session is about supplying the context, not evaluating one model response.
-
-## Live script
-
-### 00:00-01:20 - Slide 1: the uncomfortable equivalence
-
-**Show:** Slide 1, `Build a Supply Chain for Agent Context`.
-
-**Say:**
-
-> You would never pipe a random internet script into your build. Yet teams copy `SKILL.md` files
-> from the internet into an agent that can edit code, call tools, and influence a pull request. That
-> is a supply-chain decision disguised as a text file.
-
-> Meridian already signs, pins, and scans application dependencies. In the next 24 minutes, we give
-> its agent context an owner, a version, a hash, and a gate.
-
-Point out once: **APM here is Agent Package Manager.**
-
-**Switch:** VS Code, `src/refund.ts`.
-
-### 01:20-04:30 - Demo 1: quarantine before trust
-
-#### Show the pressure
-
-**Show:** `.demo-live/meridian-checkout/src/refund.ts`.
-
-Call out the obvious payment-review needs: floating-point money, card data in logs, and a retry
-without an idempotency key. The team naturally wants a reusable review skill.
-
-**Show:** `.demo-live/quarantine/refund-helper/SKILL.md`.
-
-**Say:**
-
-> Anika found this helper online. It looks like ordinary Markdown. Nobody at Meridian owns it, and
-> the editor cannot show us everything that is in it.
-
-From the repository root, run:
+Start at the repository root:
 
 ```powershell
-apm audit --file .\.demo-live\quarantine\refund-helper\SKILL.md --verbose
+Set-Location .\.demo-live\consume-checkout
+apm init --yes --target copilot
+apm install 'webmaxru/ai-native-dev/skills/agent-package-manager#v1.9.0'
 ```
 
-Expected in about **2.5 seconds**, exit `1`:
+The single quotes are deliberate: they keep the `#v1.9.0` pin intact in PowerShell and other
+shells that treat `#` as a comment marker.
+
+Expected proof:
 
 ```text
-CRITICAL ... U+202E ... Right-to-left override (RLO)
-[x] 1 critical finding(s) ... hidden characters detected
+[+] webmaxru/ai-native-dev/skills/agent-package-manager#v1.9.0
+[*] Updated apm.yml with 1 new package
+#v1.9.0 @d04f0b01
+|-- Skill integrated -> .agents/skills/
+[*] Installed 1 APM dependency
 ```
 
-**Say:**
+Measured wall times:
 
-> A readable file can carry unreadable instructions. This scanner does not claim to understand
-> intent or detect every prompt injection. It gives us a concrete first gate: hidden Unicode does
-> not enter the catalog.
+- `apm init`: **1.747 seconds**
+- direct install: **20.553 seconds**
 
-**Show:** `registry/skills/secure-payment-review/SKILL.md`, then run:
+Open the generated `apm.yml`. Point out that the command added a declared, release-pinned
+dependency rather than leaving an unexplained copied folder.
+
+**Hard cutoff:** 30 seconds for the install. If it is still resolving, use the `consume-single`
+checkpoint.
+
+### 05:45-08:30 - Move from individual use to a team manifest
+
+Show `demo/snippets/apm-consume.yml`. It contains only external assets from
+`webmaxru/ai-native-dev`:
+
+- three human-readable `v1.9.0` release pins;
+- two full immutable commit pins;
+- four skills;
+- one prompt;
+- explicit Claude, Copilot, and Cursor targets.
+
+Copy the prepared manifest and install it:
 
 ```powershell
-apm audit --file .\registry\skills\secure-payment-review\SKILL.md --verbose
-```
-
-Expected in about **2 seconds**, exit `0`:
-
-```text
-[*] 1 file(s) scanned -- no issues found
-```
-
-Show the metadata owner and the narrow required checks. Briefly point to `.github/CODEOWNERS`.
-
-**Say:**
-
-> We did not ban reuse. We moved trust earlier: review once, assign an owner, and release the result.
-
-### 04:30-05:30 - Slide 2: the route
-
-**Show:** Slide 2.
-
-Read the route left to right:
-
-```text
-quarantine -> review -> v1.0.0 -> apm.yml -> apm.lock.yaml -> native harness paths
-```
-
-**Say:**
-
-> The release is the trusted source. The manifest is intent. The lockfile is evidence. Policy
-> decides whether this source is allowed at all.
-
-**Switch:** VS Code, `.demo-live/meridian-checkout/apm.yml`.
-
-### 05:30-10:30 - Demo 2: install the approved dependency
-
-**Show:** `.demo-live/meridian-checkout/apm.yml`.
-
-Point at exactly three things:
-
-1. `targets`: Claude, Copilot, Cursor.
-2. `dependencies.apm`: the reviewed repository path.
-3. `#v1.0.0`: the release constraint; no branch tip and no copy-paste.
-
-**Say:**
-
-> This line replaces the wiki checklist. It says which reviewed context this repository depends on,
-> and the repository commits it like any other dependency declaration.
-
-Run:
-
-```powershell
-Set-Location .\.demo-live\meridian-checkout
+Copy-Item ..\..\demo\snippets\apm-consume.yml .\apm.yml
 apm install
 ```
 
-Measured warm run: **13.5 seconds**. Budget **20 seconds** before using the fallback. The command may
-print a non-fatal warning that `webmaxru/.github-private` was not found; that is APM looking for an
-organization policy in a personal-account demo. The explicit local policy arrives in the next beat.
-
-Expected key lines:
+Expected proof:
 
 ```text
-Targets: claude, copilot, cursor  (source: apm.yml)
-...secure-payment-review#v1.0.0 ... @40a6cabc
+Targets: claude, copilot, cursor
+4 skills -> .agents/skills/, .claude/skills/
+1 prompt -> .github/prompts/
+2 command adapters -> .claude/commands/, .cursor/commands/
+[*] Installed 5 APM dependencies
+```
+
+Measured wall time: **13.235 seconds** warm. A mostly cold rehearsal took about 35 seconds.
+
+The prompt adapter may report that unsupported `agent` and `name` frontmatter keys were dropped for
+Claude and Cursor. That is expected target adaptation, not an installation failure. Do not execute
+the installed version/deploy prompt during the session.
+
+**Hard cutoff:** 60 seconds. Recover with `consume-manifest`.
+
+### 08:30-11:30 - Make reproducibility visible
+
+Show the native deployment paths:
+
+```powershell
+Get-ChildItem -File -Recurse .agents\skills,.claude\skills -Filter SKILL.md |
+  Resolve-Path -Relative
+Get-Item .github\prompts\*.prompt.md,.claude\commands\*.md,.cursor\commands\*.md |
+  Resolve-Path -Relative
+```
+
+Open `apm.lock.yaml`. Point at one release-pinned skill, one full-SHA-pinned skill, and the prompt.
+For each, identify:
+
+1. `resolved_ref`
+2. `resolved_commit`
+3. `content_hash`
+4. `deployed_file_hashes`, which are APM's normalized deployed-content hashes
+
+Then prove a frozen replay leaves the lockfile byte-identical:
+
+```powershell
+$before = (Get-FileHash .\apm.lock.yaml -Algorithm SHA256).Hash
+apm install --frozen
+$after = (Get-FileHash .\apm.lock.yaml -Algorithm SHA256).Hash
+$before
+$after
+"LOCK_UNCHANGED=$($before -eq $after)"
+```
+
+Historical dry-run capture:
+
+```text
+575A76EEAFF620EAF3F9A2E031C85D24DCA265C04B06F99FD79C607A2AAFCFC4
+575A76EEAFF620EAF3F9A2E031C85D24DCA265C04B06F99FD79C607A2AAFCFC4
+LOCK_UNCHANGED=True
+```
+
+The lockfile includes generated metadata, so a fresh mutable install can produce a different
+SHA-256. The live proof is that the two values displayed in the same frozen replay are equal.
+
+Finish the consuming half with:
+
+```powershell
+apm audit --ci --no-policy
+```
+
+Expected:
+
+```text
+[+] No drift detected
+[*] All 10 check(s) passed
+```
+
+Measured times:
+
+- frozen replay: **11.066 seconds**
+- consume audit: **5.002 seconds**
+
+APM 0.28.0 can print `Installed 1 APM dependency` at the end of a five-package frozen replay. The
+detailed output correctly reports `Replayed 5 package(s)`, and the unchanged lock plus 10-check
+audit are the authoritative proof.
+
+## Live demo: Part 2 - Governing APM
+
+### 12:15-15:45 - Install from Meridian's private registry
+
+Show the authenticated GitHub page or the local private-registry file:
+
+```text
+meridian-agent-context-registry/skills/secure-payment-review/SKILL.md
+```
+
+Call out the narrow behavior, Platform Engineering author, version, and owner. Then move to the
+governed workspace:
+
+```powershell
+Set-Location ..\..
+Set-Location .\.demo-live\governed-checkout
+apm install 'webmaxru/meridian-agent-context-registry/skills/secure-payment-review#v1.0.0'
+```
+
+The session credential was loaded by preflight and is not printed. Expected proof:
+
+```text
+[+] webmaxru/meridian-agent-context-registry/skills/secure-payment-review#v1.0.0
+#v1.0.0 @5b105da7
 |-- Skill integrated -> .agents/skills/, .claude/skills/
+[*] Installed 1 APM dependency
 ```
 
-Show what landed:
-
-```powershell
-Get-ChildItem -File -Recurse .agents,.claude | Resolve-Path -Relative
-apm deps list
-```
-
-Expected files:
+Lock evidence:
 
 ```text
-.\.agents\skills\secure-payment-review\SKILL.md
-.\.claude\skills\secure-payment-review\SKILL.md
+resolved_commit: 5b105da760849b41b94a16ca043754e5336f84b6
+content_hash: sha256:54bda74d0776581d8ca64b4849cf6f096070801dbf2e7557f663eac544274016
+deployed_file_hashes: 2
 ```
 
-Explain the current **0.28.0** path model precisely:
+Measured wall time: **24.666 seconds**. APM may report that a partial clone fell back to a full bare
+clone; that is an automatic transport fallback and the command still verifies the release.
 
-- Copilot and Cursor share the converged `.agents/skills` path.
-- Claude Code receives its native `.claude/skills` path.
-- One source skill is deployed without keeping three hand-edited copies.
+**Hard cutoff:** 40 seconds. Recover with `govern-private`.
 
-### 10:30-14:30 - Demo 3: make reproducibility visible
+### 15:45-19:30 - Add the sourcing policy
 
-**Open:** `.demo-live/meridian-checkout/apm.lock.yaml`.
-
-Or print the compact proof:
-
-```powershell
-Get-Content .\apm.lock.yaml -TotalCount 24
-```
-
-Point at:
-
-1. `resolved_ref: v1.0.0` - the human release.
-2. `resolved_commit: 40a6c...` - the immutable source revision.
-3. `content_hash` - the resolved package content.
-4. `deployed_file_hashes` - what actually reached each harness path.
-
-**Say:**
-
-> The tag is human meaning. The commit is immutable source. The hashes are evidence. If a deployed
-> skill changes behind APM's back, the CI audit detects hash drift.
-
-Do not improvise a live `--frozen` mismatch. On APM 0.28.0, changing between two refs that resolve to
-the same commit can cause `apm install --frozen` to rewrite the lockfile and still exit `0`. The
-authoritative demo control is the full `apm audit --ci` gate shown next.
-
-### 14:30-18:30 - Demo 4: add the sourcing policy
-
-Copy the prepared policy into the consumer:
+Copy the prepared policy:
 
 ```powershell
 Copy-Item ..\..\demo\snippets\apm-policy.yml .\apm-policy.yml
 ```
 
-**Open:** `.demo-live/meridian-checkout/apm-policy.yml`.
-
-Point at:
+Open `apm-policy.yml` and point at:
 
 - `enforcement: block`
 - `fetch_failure: block`
-- the allowlist for `webmaxru/meridian-agent-context-demo` and nested paths
+- the private registry allow patterns
 - `require_pinned_constraint: true`
 
-**Say:**
+The `/**` pattern is required because the approved skill is below a repository path.
 
-> A lock tells us what we installed. Policy decides whether we were allowed to install it. The
-> second `/**` allow pattern matters because the approved skill lives below a repository path.
-
-Validate policy discovery:
+Validate discovery, then run the same audit used in CI:
 
 ```powershell
 apm policy status --policy-source .\apm-policy.yml --check
-```
-
-Expected in about **1.5 seconds**, exit `0`: policy found, `block`, two allow patterns, no warnings.
-
-Run the same gate CI will run:
-
-```powershell
 apm audit --ci --policy .\apm-policy.yml --no-fail-fast
 ```
 
-Expected in **2-4 seconds**, exit `0`:
+Expected:
 
 ```text
+Outcome: found
+Enforcement: block
+Effective rules: 2 dependency allow patterns
+Warnings: none
+
 [+] No drift detected
+[+] All dependencies match allow list
+[+] All dependencies use pinned constraints
 [*] All 31 check(s) passed
 ```
 
-**Say:**
+Measured times:
 
-> This rechecks source policy, manifest-to-lock consistency, hashes, hidden Unicode, and deployed
-> drift. We are not performing a fake failure for theatre. The setup is the proof; the required
-> status check is what makes it authoritative.
+- policy status: **1.709 seconds**
+- governed audit: **1.762 seconds**
 
-### 18:30-19:30 - Slide 3: local checks versus an authoritative gate
+The talk demonstrates the blocking setup, not a staged failure. The successful 31-check audit is the
+state the team permits to merge.
 
-**Show:** Slide 3.
+### 19:30-24:30 - Show the required CI boundary
 
-**Say:**
+Open `.github/workflows/apm-supply-chain.yml` and point at:
 
-> A developer can skip a local command. They cannot merge around a required check unless they also
-> have authority to change the separately protected workflow or policy. That repository boundary is
-> the trust boundary.
+1. minimal `contents: read` permission;
+2. the review-protected `meridian-registry` environment;
+3. its encrypted `MERIDIAN_REGISTRY_PAT` secret mapped to `GITHUB_APM_PAT` only on the audit step;
+4. `actions/checkout` pinned to an immutable commit;
+5. `microsoft/apm-action` pinned to an immutable commit;
+6. explicit APM CLI `0.28.0`;
+7. `setup-only: true`, so the action does not repair drift before audit;
+8. policy presence check with `--check --no-cache`;
+9. full audit with `--no-cache --no-fail-fast`.
 
-Call out the four protected links:
+Open `.github/CODEOWNERS`, then show the successful hosted `audit` job and `main` protection in
+GitHub:
 
 ```text
-immutable action -> pinned CLI -> blocking policy -> required status
+strict required status: audit
+administrator enforcement: enabled
+approving reviews: 1
+CODEOWNERS review: required
+private-registry environment approval: required
+force pushes: disabled
+branch deletion: disabled
+linear history: required
+conversation resolution: required
 ```
 
-**Switch:** VS Code, `.github/workflows/apm-supply-chain.yml`.
+Use the accurate guarantee:
 
-### 19:30-24:30 - Demo 5: show the unbypassable setup
+> This is unbypassable for an ordinary contributor: no direct push and no merge without the
+> required audit and owning review. Repository administrators remain the ultimate trust boundary.
 
-**Show:** `.github/workflows/apm-supply-chain.yml`.
-
-Point at:
-
-1. Minimal `contents: read` permission.
-2. `microsoft/apm-action` pinned to immutable commit
-   `d723bb64ed70c135bbaf87d126b721dd2dae0439` (release `v1.10.0`).
-3. `apm-version: "0.28.0"` because the action's current default is older.
-4. `setup-only: true` so the action does not overwrite a tampered deployed file before audit.
-5. Policy existence check with `--check --no-cache`.
-6. Full audit with `--no-cache --no-fail-fast`.
-
-**Show:** `.github/CODEOWNERS`.
-
-Explain that the catalog, policy, and workflow require platform review. Then switch to the GitHub
-Actions tab and show the green `audit` job. Finally show branch protection/rules and the required
-`audit` status.
-
-Phrase the guarantee accurately:
-
-> It is unbypassable for an ordinary contributor: no direct push, no merge without `audit`, and no
-> workflow or catalog change without the owning review. As with every CI control, organization
-> administrators remain the ultimate trust boundary.
-
-### 24:30-25:30 - Slide 4: close
-
-**Show:** Slide 4.
-
-**Say:**
-
-> The skill is no longer an arbitrary file copied from the internet. It is a reviewed source, a
-> declared dependency, an immutable resolution, a hashed deployment, and a required policy check.
-
-> Agent context becomes a real dependency when it has four things: an owner, a version, a hash, and
-> a gate.
-
-Leave the repository URL on screen:
-
-<https://github.com/webmaxru/meridian-agent-context-demo>
+The demo's contribution model uses same-repository branches. GitHub does not expose the private
+registry environment secret to fork workflows, so a fork pull request cannot satisfy `audit`; a
+maintainer must recreate the reviewed change on a trusted repository branch.
 
 ## Recovery plan
 
-Use a hard cutoff. The audience should see the next proof, not watch you debug the previous command.
+Use a hard cutoff. The audience should see the next proof, not watch network troubleshooting.
 
-| Live step | Cutoff | Recovery command | What to say |
-| --- | ---: | --- | --- |
-| Untrusted file scan | 5 s | `Get-Content .\demo\fallback\01-untrusted-scan.txt` | "Here is the captured 0.28.0 result: critical U+202E, exit 1." |
-| Trusted file scan | 7 s | Open the reviewed `SKILL.md`; continue | "The catalog copy passed preflight; the interesting proof is the released install." |
-| `apm install` | 20 s | See the checkpoint sequence below | "The network is not the demo. The resolved state is." |
-| Lockfile display wraps | immediate | `Get-Content ..\..\demo\fallback\03-lockfile.txt` | "Tag, commit, package hash, deployed-file hashes." |
-| Policy status/audit | 10 s | `Get-Content ..\..\demo\fallback\04-audit-pass.txt` | "The preflight ran this exact 31-check gate." |
-| GitHub Actions page | 5 s | Stay in the workflow file | "The local command already passed; this file makes it required in CI." |
-| Slides fail | immediate | Continue from VS Code | The story and proof are entirely in the repository. |
-
-### Install checkpoint
-
-If `apm install` exceeds 20 seconds, press `Ctrl+C`, then run from
-`.demo-live\meridian-checkout`:
-
-```powershell
-Set-Location ..\..
-.\scripts\jump-to-checkpoint.ps1 -Name installed
-Set-Location .\.demo-live\meridian-checkout
-Get-Content ..\..\demo\fallback\02-install.txt
-```
-
-The checkpoint restores the real generated lockfile and deployed skill files in under one second.
-
-### Governed checkpoint
-
-If the local policy copy or audit state becomes confusing:
-
-```powershell
-Set-Location ..\..
-.\scripts\jump-to-checkpoint.ps1 -Name governed
-Set-Location .\.demo-live\meridian-checkout
-Get-Content ..\..\demo\fallback\04-audit-pass.txt
-```
-
-### Reset between rehearsals
+| Live step | Cutoff | Recovery checkpoint or file |
+| --- | ---: | --- |
+| Direct public install | 30 s | `consume-single` + `demo/fallback/01-consume-single.txt` |
+| Five-asset manifest install | 60 s | `consume-manifest` + `demo/fallback/02-consume-manifest.txt` |
+| Frozen replay or lock display | 20 s | `consume-manifest` + `demo/fallback/03-reproducibility.txt` |
+| Private registry install | 40 s | `govern-private` + `demo/fallback/04-private-registry.txt` |
+| Policy status or audit | 10 s | `govern-policy` + `demo/fallback/05-policy-audit.txt` |
+| GitHub pages | 5 s | Keep workflow open + `demo/fallback/06-required-gate.txt` |
+| Slides | immediate | Continue from VS Code; every proof is in the repositories |
 
 From the repository root:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\reset-demo.ps1
+Set-Location "$HOME\Downloads\projects\meridian-agent-context-demo"
+.\scripts\jump-to-checkpoint.ps1 -Name consume-single
+.\scripts\jump-to-checkpoint.ps1 -Name consume-manifest
+.\scripts\jump-to-checkpoint.ps1 -Name govern-private
+.\scripts\jump-to-checkpoint.ps1 -Name govern-policy
 ```
 
-Reset time in the dry run: **1.1 seconds**.
+Always run the `Set-Location` line first, because a failed live command leaves the terminal inside a
+`.demo-live` workspace. Use only the checkpoint needed for the current beat, then return to that
+workspace. Measured restore times:
+
+| Checkpoint | Time |
+| --- | ---: |
+| `consume-single` | 0.217 s |
+| `consume-manifest` | 0.319 s |
+| `govern-private` | 0.107 s |
+| `govern-policy` | 0.123 s |
+
+Reset between rehearsals:
+
+```powershell
+& .\scripts\reset-demo.ps1
+```
 
 ## Battle-tested timings
 
@@ -424,15 +434,18 @@ Measured on the presentation machine on 2026-08-25:
 
 | Operation | Result | Wall time |
 | --- | --- | ---: |
-| Full preflight | PASS | 14.4-32.6 s |
-| Reset live workspace | PASS | 1.1-2.2 s |
-| Scan hidden U+202E | expected FAIL, exit 1 | 2.5 s |
-| Scan reviewed skill | PASS | 1.9 s |
-| Install pinned public skill | PASS | 13.5 s warm; 23.9 s cold/network-bound |
-| Policy status | PASS | 1.5 s |
-| Full 31-check policy audit | PASS | 1.7-3.9 s |
-| Restore installed checkpoint | PASS | 0.7 s |
+| Full preflight | PASS | 44.97 s |
+| `apm init --yes --target copilot` | PASS | 1.747 s |
+| Direct public skill install | PASS | 20.553 s |
+| Five-asset manifest install | PASS | 13.235 s |
+| Frozen replay | PASS, lock byte-identical | 11.066 s |
+| Consume audit | PASS, 10 checks | 5.002 s |
+| Private registry install | PASS | 24.666 s |
+| Policy status | PASS | 1.709 s |
+| Governed audit | PASS, 31 checks | 1.762 s |
+| Complete critical APM path | PASS | 79.740 s |
+| All four checkpoint restores | PASS | 0.107-0.319 s |
 
-The complete critical path was rehearsed end to end in **72.4 seconds of command time**. Network is
-required only to resolve the public GitHub release; every stage after the checkpoint has a local,
-committed fallback.
+The full dry run also audited every recovery state: 10 checks for each consume/private-install
+checkpoint and 31 checks for the governed checkpoint. All **102** recovery and critical audit checks
+passed, and the tracked working-tree state was unchanged.
