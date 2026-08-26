@@ -47,7 +47,7 @@ apm install OWNER/REPO/skills/SKILL_NAME
 2. `.claude-plugin/marketplace.json` (optional) — Marketplace listing. Contains two distinct version concerns:
    - `metadata.version`: The marketplace collection version. **Not bumped during skill/plugin releases.** Must stay in sync with `metadata.version` in `.github/plugin/marketplace.json` if both exist.
    - `plugins[].version`: The version of the listed plugin (for local plugins with `source: "."`). Bumped during releases to match plugin.json.
-
+   
    If marketplace.json is absent, the plugin is assumed to be listed by a marketplace defined in another repository. Only `plugin.json` is version-bumped in that case.
    ```json
    {

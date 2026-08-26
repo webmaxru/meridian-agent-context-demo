@@ -1,0 +1,2 @@
+# APM reference checkpoints preserve upstream package bytes for hash verification.
+reference/** -text -whitespace
