@@ -31,7 +31,8 @@ webmaxru/meridian-agent-context-registry/skills/secure-payment-review#v1.0.0
 
 The exact commands, timing cutoffs, and recovery checkpoints are in
 [`DEMO-RUNBOOK.md`](DEMO-RUNBOOK.md). The near-verbatim narration is in
-[`TALK-TRACK.md`](TALK-TRACK.md).
+[`TALK-TRACK.md`](TALK-TRACK.md). The presentation is published at
+[**webmaxru.github.io/meridian-agent-context-demo**](https://webmaxru.github.io/meridian-agent-context-demo/).
 
 ```powershell
 & .\scripts\preflight.ps1
